@@ -284,7 +284,7 @@ bool s2h_fontLookup(uint ascii, ivec2 pxPos)
     // 0..ff
     uint dwordValue = g_miniFont[dwordId];
 
-    return imod((dwordValue >> (31 - bitId)), 2) != 0;
+    return imod(shift_right(dwordValue, (31 - bitId)), 2) != 0;
 }
 
 void s2h_printCharacter(inout ContextGather ui, uint ascii)
@@ -492,7 +492,7 @@ void s2h_printHex(inout ContextGather ui, uint value)
 	for(int i = 7; i >= 0; --i)
 	{
 		// 0..15
-		uint nibble = imod(value >> (uint(i) * 4), 16);
+		uint nibble = imod(shift_right(value, (uint(i) * 4)), 16);
 		uint start = (nibble < 10) ? _0 : (_A - 10);
 		s2h_printCharacter(ui, start + nibble);
 	}
