@@ -2,6 +2,11 @@
 #define uint int
 #define uvec2 ivec2
 
+int imod(int x, int y)
+{
+    return x - y * (x / y);
+}
+
 //////////////////////////////////////////////////////////////////////////
 //   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
 //  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
