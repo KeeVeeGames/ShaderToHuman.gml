@@ -1,3 +1,7 @@
+// GameMaker-port specific
+#define uint int
+#define uvec2 ivec2
+
 //////////////////////////////////////////////////////////////////////////
 //   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
 //  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
