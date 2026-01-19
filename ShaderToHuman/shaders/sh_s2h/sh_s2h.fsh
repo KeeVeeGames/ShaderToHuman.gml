@@ -1,38 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //////////////////////////////////////////////////////////////////////////
 //   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
 //  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
@@ -53,9 +18,6 @@
 //   // for correct AntiAliasing 
 //   srgbColor = float4(s2h_accurateLinearToSRGB(linearColor.rgb), 1);
 // }
-
-
-
 
 // Any potentially API breaking update we should increase the version by 1 allowing other code to adapt to S2H.
 
@@ -185,28 +147,6 @@ void s2h_sliderRGB(inout ContextGather ui, uint widthInCharacters, inout vec3 va
 // LDR color (0..1 range) with alpha
 void s2h_sliderRGBA(inout ContextGather ui, uint widthInCharacters, inout vec4 value);
 
-// not yet for GLSL 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // helper functions ----------------------------------------------------------------------
 
 // slow but accurate
@@ -224,23 +164,11 @@ vec3 s2h_colorRampRGB(float value);
 
 // implementation ----------------------------------------------------------------------
 
-
-
-     const float S2H_FLT_MAX = intBitsToFloat(2139095039);
-
-
-
-
+const float S2H_FLT_MAX = intBitsToFloat(2139095039);
 
 // You can define this to provide your own font (different size, visual or better lookup performance by using a texture)
 
-
-
-
-	const uint g_miniFont[] = uint[](
-
-
-
+const uint g_miniFont[] = uint[](
     0x00306c6cu, 0x30003860u, 0x18600000u, 0x00000006u, 
     0x00786c6cu, 0x7cc66c60u, 0x30306630u, 0x0000000cu, 
     0x00786cfeu, 0xc0cc38c0u, 0x60183c30u, 0x00000018u, 
@@ -289,11 +217,7 @@ vec3 s2h_colorRampRGB(float value);
     0x7c7c600cu, 0x34cc78feu, 0x6c7c6430u, 0x183000ffu, 
     0x600cf0f8u, 0x1876306cu, 0xc60cfc1cu, 0x18e000ffu, 
     0xf01e0000u, 0x00000000u, 0x00f80000u, 0x000000ffu
-
-	);
-
-
-
+);
 
 // todo: consider define or static cost int or float
 // 8x8 font 
@@ -337,87 +261,85 @@ void s2h_printCharacter(inout ContextGather ui, uint ascii)
 	ui.pxCursor.x += s2h_fontSize() * ui.scale;
 }
 
+const uint _A = 65u;
+const uint _B = 66u;
+const uint _C = 67u;
+const uint _D = 68u;
+const uint _E = 69u;
+const uint _F = 70u;
+const uint _G = 71u;
+const uint _H = 72u;
+const uint _I = 73u;
+const uint _J = 74u;
+const uint _K = 75u;
+const uint _L = 76u;
+const uint _M = 77u;
+const uint _N = 78u;
+const uint _O = 79u;
+const uint _P = 80u;
+const uint _Q = 81u;
+const uint _R = 82u;
+const uint _S = 83u;
+const uint _T = 84u;
+const uint _U = 85u;
+const uint _V = 86u;
+const uint _W = 87u;
+const uint _X = 88u;
+const uint _Y = 89u;
+const uint _Z = 90u;
 
+const uint _a = (_A + 32u);
+const uint _b = (_B + 32u);
+const uint _c = (_C + 32u);
+const uint _d = (_D + 32u);
+const uint _e = (_E + 32u);
+const uint _f = (_F + 32u);
+const uint _g = (_G + 32u);
+const uint _h = (_H + 32u);
+const uint _i = (_I + 32u);
+const uint _j = (_J + 32u);
+const uint _k = (_K + 32u);
+const uint _l = (_L + 32u);
+const uint _m = (_M + 32u);
+const uint _n = (_N + 32u);
+const uint _o = (_O + 32u);
+const uint _p = (_P + 32u);
+const uint _q = (_Q + 32u);
+const uint _r = (_R + 32u);
+const uint _s = (_S + 32u);
+const uint _t = (_T + 32u);
+const uint _u = (_U + 32u);
+const uint _v = (_V + 32u);
+const uint _w = (_W + 32u);
+const uint _x = (_X + 32u);
+const uint _y = (_Y + 32u);
+const uint _z = (_Z + 32u);
 
- const uint _A = 65u;
- const uint _B = 66u;
- const uint _C = 67u;
- const uint _D = 68u;
- const uint _E = 69u;
- const uint _F = 70u;
- const uint _G = 71u;
- const uint _H = 72u;
- const uint _I = 73u;
- const uint _J = 74u;
- const uint _K = 75u;
- const uint _L = 76u;
- const uint _M = 77u;
- const uint _N = 78u;
- const uint _O = 79u;
- const uint _P = 80u;
- const uint _Q = 81u;
- const uint _R = 82u;
- const uint _S = 83u;
- const uint _T = 84u;
- const uint _U = 85u;
- const uint _V = 86u;
- const uint _W = 87u;
- const uint _X = 88u;
- const uint _Y = 89u;
- const uint _Z = 90u;
-
- const uint _a = (_A + 32u);
- const uint _b = (_B + 32u);
- const uint _c = (_C + 32u);
- const uint _d = (_D + 32u);
- const uint _e = (_E + 32u);
- const uint _f = (_F + 32u);
- const uint _g = (_G + 32u);
- const uint _h = (_H + 32u);
- const uint _i = (_I + 32u);
- const uint _j = (_J + 32u);
- const uint _k = (_K + 32u);
- const uint _l = (_L + 32u);
- const uint _m = (_M + 32u);
- const uint _n = (_N + 32u);
- const uint _o = (_O + 32u);
- const uint _p = (_P + 32u);
- const uint _q = (_Q + 32u);
- const uint _r = (_R + 32u);
- const uint _s = (_S + 32u);
- const uint _t = (_T + 32u);
- const uint _u = (_U + 32u);
- const uint _v = (_V + 32u);
- const uint _w = (_W + 32u);
- const uint _x = (_X + 32u);
- const uint _y = (_Y + 32u);
- const uint _z = (_Z + 32u);
-
- const uint _SINGLEQUOTE = 39u;   // '
- const uint _UNDERSCORE = 95u;    // _
- const uint _MINUS = 45u;         // -
- const uint _PLUS = 43u;          // +
- const uint _ASTERISK = 42u;      // *
- const uint _PERIOD = 46u;        // .
- const uint _COLON = 58u;         // :
- const uint _COMMA = 44u;         // ,
- const uint _SPACE = 32u;         //  
- const uint _LESS = 60u;          // <
- const uint _EQUAL = 61u;         // =
- const uint _GREATER = 62u;       // >
- const uint _SLASH = 47u;         // /
- const uint _BACKSLASH = 92u;     //
- const uint _0 = 48u;
- const uint _1 = 49u;
- const uint _2 = 50u;
- const uint _3 = 51u;
- const uint _4 = 52u;
- const uint _5 = 53u;
- const uint _6 = 54u;
- const uint _7 = 55u;
- const uint _8 = 56u;
- const uint _9 = 57u;
- const int _S2H_VERSION = 11;
+const uint _SINGLEQUOTE = 39u;   // '
+const uint _UNDERSCORE = 95u;    // _
+const uint _MINUS = 45u;         // -
+const uint _PLUS = 43u;          // +
+const uint _ASTERISK = 42u;      // *
+const uint _PERIOD = 46u;        // .
+const uint _COLON = 58u;         // :
+const uint _COMMA = 44u;         // ,
+const uint _SPACE = 32u;         //  
+const uint _LESS = 60u;          // <
+const uint _EQUAL = 61u;         // =
+const uint _GREATER = 62u;       // >
+const uint _SLASH = 47u;         // /
+const uint _BACKSLASH = 92u;     //
+const uint _0 = 48u;
+const uint _1 = 49u;
+const uint _2 = 50u;
+const uint _3 = 51u;
+const uint _4 = 52u;
+const uint _5 = 53u;
+const uint _6 = 54u;
+const uint _7 = 55u;
+const uint _8 = 56u;
+const uint _9 = 57u;
+const int _S2H_VERSION = 11;
 
 void s2h_init(out ContextGather ui, vec2 inPxPos)
 {
@@ -463,6 +385,7 @@ void s2h_printTxt(inout ContextGather ui, uint a)
 {
 	s2h_printCharacter(ui, a);
 }
+
 // glsl has no default arguments to we implement multiple functions instead making porting easier
 void s2h_printTxt(inout ContextGather ui, uint a, uint b)
 { s2h_printTxt(ui, a); s2h_printCharacter(ui, b); }
@@ -894,7 +817,6 @@ bool s2h_checkBox(inout ContextGather ui, bool checked)
 	return mouseOver && delta.x == 0.0f && delta.y == 0.0f;
 }
 
-
 void s2h_progress(inout ContextGather ui, uint widthInCharacters, float fraction)
 {
 	vec4 color = ui.buttonColor;
@@ -922,7 +844,6 @@ void s2h_progress(inout ContextGather ui, uint widthInCharacters, float fraction
 
 	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0f - ui.dstColor.a));
 }
-
 
 void s2h_sliderFloat(inout ContextGather ui, uint widthInCharacters, inout float value, float minValue, float maxValue)
 {
@@ -1056,105 +977,6 @@ void s2h_sliderRGBA(inout ContextGather ui, uint widthInCharacters, inout vec4 v
 	ui.buttonColor = backup;
 }
 
-// not yet for GLSL 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 vec3 s2h_accurateLinearToSRGB(vec3 linearCol)
 {
 	vec3 sRGBLo = linearCol * 12.92;
@@ -1201,4 +1023,3 @@ vec3 s2h_colorRampRGB(float value)
 		clamp(1.0f - abs(value - 0.5f) * 2.0f,0.0f,1.0f),
 		clamp(1.0f - abs(value - 1.0f) * 2.0f,0.0f,1.0f));
 }
-
