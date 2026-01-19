@@ -13,12 +13,12 @@
 // #include "s2h.h"
 // {
 //   ContextGather ui;
-//   // pxPos is the integer pixel position + 0.5f (pixel centered)
-//   s2h_init(ui, pxPos + 0.5f);
+//   // pxPos is the integer pixel position + 0.5 (pixel centered)
+//   s2h_init(ui, pxPos + 0.5);
 //   // print AB 
 //   s2h_printTxt(ui, _A, _B);
 //   // Note: ui.dstColor is premultiplied
-//   linearColor = linearBackground * (1.0f - ui.dstColor.a) + ui.dstColor;
+//   linearColor = linearBackground * (1.0 - ui.dstColor.a) + ui.dstColor;
 //   // for correct AntiAliasing 
 //   srgbColor = float4(s2h_accurateLinearToSRGB(linearColor.rgb), 1);
 // }
@@ -227,7 +227,7 @@ uniform int g_miniFont[192];
 
 // todo: consider define or static cost int or float
 // 8x8 font 
-float s2h_fontSize() { return 8.0f; }
+float s2h_fontSize() { return 8.0; }
 
 // don't use directly
 // can be used for scatter and gather
@@ -351,9 +351,9 @@ void s2h_init(out ContextGather ui, vec2 inPxPos)
 {
 	// white, opaque 
 	ui.textColor = vec4(1, 1, 1, 1); 
-	ui.pxLeftX = 0.0f; 
+	ui.pxLeftX = 0.0; 
 	ui.pxCursor = vec2(0, 0); 
-	ui.scale = 1.0f;
+	ui.scale = 1.0;
 	ui.mouseInput = vec4(-100, -100, 0, 0); 
 
 	ui.pxPos = inPxPos;
@@ -361,10 +361,10 @@ void s2h_init(out ContextGather ui, vec2 inPxPos)
 	ui.dstColor = vec4(0, 0, 0, 0);
 	ui.s2h_State = ivec4(0, 0, 0, 0);
 
-	ui.frameFillColor = vec4(0.9f, 0.9f, 0.9f, 1);
-	ui.frameBorderColor = vec4(0.7f, 0.7f, 0.7f, 1);
-	ui.buttonColor = vec4(0.5f, 0.5f, 0.5f, 1);
-	ui.lineWidth = 2.0f;
+	ui.frameFillColor = vec4(0.9, 0.9, 0.9, 1);
+	ui.frameBorderColor = vec4(0.7, 0.7, 0.7, 1);
+	ui.buttonColor = vec4(0.5, 0.5, 0.5, 1);
+	ui.lineWidth = 2.0;
 }
 
 void s2h_setCursor(inout ContextGather ui, vec2 inpxLeftTop)
@@ -376,7 +376,7 @@ void s2h_setCursor(inout ContextGather ui, vec2 inpxLeftTop)
 void s2h_deinit(inout ContextGather ui, out ivec4 s2h_State)
 {
 	// if mouse input was set and mouse is released, we forget which button was active
-	if(ui.mouseInput.x != -100.0f && ui.mouseInput.z == 0.0f)
+	if(ui.mouseInput.x != -100.0 && ui.mouseInput.z == 0.0)
 		ui.s2h_State = ivec4(0,0,0,0);
 
 	s2h_State = ui.s2h_State;
@@ -482,7 +482,7 @@ void s2h_printFloat(inout ContextGather ui, float value)
 	// fractional digits
 	for(uint i = 0u; i < digitCount; ++i)
 	{
-		fractional *= 10.0f;
+		fractional *= 10.0;
 		// 0..9
 		uint digit = uint(fractional);
 		fractional = fract(fractional);
@@ -494,10 +494,10 @@ void s2h_printBox(inout ContextGather ui, vec4 color)
 {
 	vec2 pxLocal = vec2(ui.pxPos - ui.pxCursor) / float(ui.scale) - vec2(4, 4);
 
-	float mask = clamp(4.0f - max(abs(pxLocal.x), abs(pxLocal.y)),0.0f,1.0f);
+	float mask = clamp(4.0 - max(abs(pxLocal.x), abs(pxLocal.y)),0.0,1.0);
 
 //	dstColor = lerp(dstColor, float4(color.rgb, 1), color.a * mask);
-	if(mask > 0.0f)
+	if(mask > 0.0)
 		ui.dstColor = mix(ui.dstColor, vec4(color.rgb, 1), color.a);
 
 	ui.pxCursor.x += s2h_fontSize() * ui.scale;
@@ -508,18 +508,18 @@ void s2h_drawDisc(inout ContextGather ui, vec2 pxCenter, float pxRadius, vec4 co
 	vec2 pxLocal = ui.pxPos - pxCenter;
 
 	float len = length(pxLocal);
-	float mask = clamp(pxRadius - len,0.0f,1.0f);
+	float mask = clamp(pxRadius - len,0.0,1.0);
 
 	ui.dstColor = mix(ui.dstColor, vec4(color.rgb, 1), color.a * mask);
 }
 
 void s2h_drawCircle(inout ContextGather ui, vec2 pxCenter, float pxRadius, vec4 color, float pxThickness)
 {
-	float r = pxThickness * 0.5f;
+	float r = pxThickness * 0.5;
 	vec2 pxLocal = ui.pxPos - pxCenter;
 
 	float len = length(pxLocal);
-	float mask = clamp(pxRadius - len + r,0.0f,1.0f) * (1.0f - clamp(pxRadius - len - r,0.0f,1.0f));
+	float mask = clamp(pxRadius - len + r,0.0,1.0) * (1.0 - clamp(pxRadius - len - r,0.0,1.0));
 
 	ui.dstColor = mix(ui.dstColor, vec4(color.rgb, 1), color.a * mask);
 }
@@ -536,11 +536,11 @@ void s2h_drawHalfSpace(inout ContextGather ui, vec3 halfSpace, vec2 visualizePoi
     float diskDist = length(onPoint - ui.pxPos);
 
 	// 0..1
-    float sideMask = clamp(planeDist,0.0f,1.0f);
+    float sideMask = clamp(planeDist,0.0,1.0);
 	// 0..1
-    float lineMask = clamp(ui.lineWidth - abs(planeDist - ui.lineWidth),0.0f,1.0f) * clamp(lineRadius - diskDist,0.0f,1.0f);
+    float lineMask = clamp(ui.lineWidth - abs(planeDist - ui.lineWidth),0.0,1.0) * clamp(lineRadius - diskDist,0.0,1.0);
 	// 0..1
-    float semiDiskMask = clamp(pxCircleRadius - diskDist,0.0f,1.0f) * sideMask;
+    float semiDiskMask = clamp(pxCircleRadius - diskDist,0.0,1.0) * sideMask;
     float mask = max(semiDiskMask, lineMask);
 
 	ui.dstColor = mix(ui.dstColor, vec4(color.rgb, 1), color.a * mask);
@@ -554,16 +554,16 @@ void s2h_drawRectangle(inout ContextGather ui, vec2 pxLeftTop, vec2 pxBottomRigh
 
 void s2h_drawRectangleAA(inout ContextGather ui, vec2 pxA, vec2 pxB, vec4 borderColor, vec4 innerColor, float pxThickness)
 {
-	float r = pxThickness * 0.5f;
+	float r = pxThickness * 0.5;
 
-	vec2 pxCenter = (pxA + pxB) * 0.5f;
-	vec2 pxHalfSize = abs(pxB - pxA) * 0.5f;
+	vec2 pxCenter = (pxA + pxB) * 0.5;
+	vec2 pxHalfSize = abs(pxB - pxA) * 0.5;
 	
 	vec2 pxLocalOuter = max(abs(ui.pxPos - pxCenter) - pxHalfSize, vec2(0, 0));
 	vec2 pxLocalInner = max(abs(ui.pxPos - pxCenter) - pxHalfSize + r, vec2(0, 0));
 
-	float maskOuter = clamp(1.0f + r - length(pxLocalOuter),0.0f,1.0f);
-	float maskInner = clamp(length(pxLocalInner) - 0.5f,0.0f,1.0f);
+	float maskOuter = clamp(1.0 + r - length(pxLocalOuter),0.0,1.0);
+	float maskInner = clamp(length(pxLocalInner) - 0.5,0.0,1.0);
 
 	vec4 color = mix(innerColor, vec4(borderColor.rgb, 1), borderColor.a * maskInner);
 
@@ -582,17 +582,17 @@ void s2h_drawCrosshair(inout ContextGather ui, vec2 pxCenter, float pxRadius, ve
 void s2h_drawLine(inout ContextGather ui, vec2 pxBegin, vec2 pxEnd, vec4 color, float pxThickness)
 {
 	pxThickness++;
-	float r = pxThickness * 0.5f;
+	float r = pxThickness * 0.5;
 	vec2 delta = pxEnd - pxBegin;
 	float len = length(delta);
-	if(len > 0.01f)
+	if(len > 0.01)
 	{
 		vec2 tangent = delta / len;
 		vec2 normal = vec2(tangent.y, -tangent.x);
 		vec2 local = vec2(ui.pxPos) - pxBegin;
 		vec2 uv = vec2(dot(local, tangent), dot(local, normal));
 		// 0...1
-		float mask = clamp(r - abs(uv.y),0.0f,1.0f) * clamp(r - uv.x + len,0.0f,1.0f) * clamp(r + uv.x,0.0f,1.0f);
+		float mask = clamp(r - abs(uv.y),0.0,1.0) * clamp(r - uv.x + len,0.0,1.0) * clamp(r + uv.x,0.0,1.0);
 
 		ui.dstColor = mix(ui.dstColor, vec4(color.rgb, 1), color.a * mask);
 	}
@@ -610,13 +610,13 @@ vec3 s2h_getHalfSpacePlane(vec2 pointA, vec2 pointB)
 void s2h_drawTriangle(inout ContextGather ui, s2h_Triangle tri, vec4 color)
 {
     vec3 abPlane = s2h_getHalfSpacePlane(tri.A, tri.B);
-    float abMask = clamp(dot(abPlane, vec3(ui.pxPos, 1)) - 0.5f,0.0f,1.0f);
+    float abMask = clamp(dot(abPlane, vec3(ui.pxPos, 1)) - 0.5,0.0,1.0);
 
     vec3 bcPlane = s2h_getHalfSpacePlane(tri.B, tri.C);
-    float bcMask = clamp(dot(bcPlane, vec3(ui.pxPos, 1))- 0.5f,0.0f,1.0f);
+    float bcMask = clamp(dot(bcPlane, vec3(ui.pxPos, 1))- 0.5,0.0,1.0);
 
     vec3 caPlane = s2h_getHalfSpacePlane(tri.C, tri.A);
-    float caMask = clamp(dot(caPlane, vec3(ui.pxPos, 1)) - 0.5f,0.0f,1.0f);
+    float caMask = clamp(dot(caPlane, vec3(ui.pxPos, 1)) - 0.5,0.0,1.0);
     
     float mask = abMask * bcMask * caMask;
     ui.dstColor = mix(ui.dstColor, vec4(color.rgb, 1), color.a * mask);
@@ -627,7 +627,7 @@ void s2h_drawArrow(inout ContextGather ui, vec2 pxStart, vec2 pxEnd, vec4 color,
     vec2 direction = vec2(0,1);
     direction = normalize(pxEnd - pxStart);
 
-    const float Thickness = 10.0f;
+    const float Thickness = 10.0;
 
     vec2 lineStart = pxStart;
     // Subtract the arrow length from lineEnd - arrow fits in pxStart...pxEnd
@@ -647,29 +647,29 @@ void s2h_drawArrow(inout ContextGather ui, vec2 pxStart, vec2 pxEnd, vec4 color,
 void s2h_drawSRGBRamp(inout ContextGather ui, vec2 pxPos)
 {
 	// snap to pixel center
-	pxPos = floor(pxPos) + 0.5f;
+	pxPos = floor(pxPos) + 0.5;
 
 	vec2 local = ui.pxPos - pxPos;
 
-	float u = local.x / 256.0f;
+	float u = local.x / 256.0;
 
-	if(local.y > 16.0f)
-		u = floor(u * 16.0f) / 16.0f;
+	if(local.y > 16.0)
+		u = floor(u * 16.0) / 16.0;
 
 	vec3 col = s2h_accurateSRGBToLinear(vec3(u, u, u));
 
-	s2h_drawRectangle(ui, pxPos - 2.0f, pxPos + vec2(256, 32) + 2.0f, vec4(s2h_colorRampRGB(u), 1));
+	s2h_drawRectangle(ui, pxPos - 2.0, pxPos + vec2(256, 32) + 2.0, vec4(s2h_colorRampRGB(u), 1));
 	s2h_drawRectangle(ui, pxPos, pxPos + vec2(256, 32), vec4(col, 1));
 
 	ContextGather backup = ui;
-	s2h_setScale(ui, 1.0f);
+	s2h_setScale(ui, 1.0);
 	ui.textColor = vec4(1, 1, 1, 1);
-	s2h_setCursor(ui, pxPos + vec2(2.0f, 22));
+	s2h_setCursor(ui, pxPos + vec2(2.0, 22));
 	s2h_printTxt(ui, _0);
-	s2h_setCursor(ui, pxPos + vec2(128.0f - 1.5f * 8.0f, 22));
+	s2h_setCursor(ui, pxPos + vec2(128.0 - 1.5 * 8.0, 22));
 	s2h_printTxt(ui, _1, _2, _7);
 	ui.textColor = vec4(0, 0, 0, 1);
-	s2h_setCursor(ui, pxPos + vec2(256.0f - 3.2f * 8.0f, 22));
+	s2h_setCursor(ui, pxPos + vec2(256.0 - 3.2 * 8.0, 22));
 	s2h_printTxt(ui, _2, _5, _5);
 
 	ui.pxCursor = backup.pxCursor;
@@ -682,11 +682,11 @@ void s2h_printDisc(inout ContextGather ui, vec4 color)
 { 
 	vec2 pxLocal = vec2(ui.pxPos - ui.pxCursor) / float(ui.scale) - vec2(4, 4); 
  
-	float mask = clamp(4.0f - length(pxLocal),0.0f,1.0f); 
+	float mask = clamp(4.0 - length(pxLocal),0.0,1.0); 
  
 //	dstColor = lerp(stColor, float4(color.rgb, 1), color.a * mask); 
 	// no AA for now
-	if(mask > 0.0f) 
+	if(mask > 0.0) 
 		ui.dstColor = mix(ui.dstColor, vec4(color.rgb, 1), color.a);
  
 	ui.pxCursor.x += s2h_fontSize() * ui.scale; 
@@ -694,7 +694,7 @@ void s2h_printDisc(inout ContextGather ui, vec4 color)
 
 float s2h_computeDistToBox(inout ContextGather ui, vec2 p, vec2 center, vec2 halfSize)
 {
-	vec2 pxLocal = vec2(p - center);// - float2(3.5f, 3.5f) * ui.scale;
+	vec2 pxLocal = vec2(p - center);// - float2(3.5, 3.5) * ui.scale;
 	vec2 dist2 = max(vec2(0, 0), abs(pxLocal) - halfSize);
 	return max(dist2.x, dist2.y);
 }
@@ -702,9 +702,9 @@ float s2h_computeDistToBox(inout ContextGather ui, vec2 p, vec2 center, vec2 hal
 // @param aabb .x:minx, .y:miny, z:maxx, w:maxy
 float s2h_computeDistToBox(inout ContextGather ui, vec2 p, vec4 aabb)
 {
-	vec2 center = (aabb.xy + aabb.zw) * 0.5f; 
-	vec2 halfSize = (aabb.zw - aabb.xy) * 0.5f;
-	vec2 pxLocal = vec2(p - center);// - float2(3.5f, 3.5f) / ui.scale;
+	vec2 center = (aabb.xy + aabb.zw) * 0.5; 
+	vec2 halfSize = (aabb.zw - aabb.xy) * 0.5;
+	vec2 pxLocal = vec2(p - center);// - float2(3.5, 3.5) / ui.scale;
 	vec2 dist2 = max(vec2(0, 0), abs(pxLocal) - halfSize);
 	return max(dist2.x, dist2.y);
 }
@@ -718,25 +718,25 @@ void s2h_frame(inout ContextGather ui, uint widthInCharacters)
 
 	float dist = s2h_computeDistToBox(ui, ui.pxPos, aabb) / ui.scale;
 
-	float rimMask = clamp(3.0f - dist,0.0f,1.0f);
-	float outerMask = clamp(4.0f - dist,0.0f,1.0f);
+	float rimMask = clamp(3.0 - dist,0.0,1.0);
+	float outerMask = clamp(4.0 - dist,0.0,1.0);
 
 	vec4 localColor = vec4(0,0,0,0);
 
 	// no AA for now
-	if(outerMask > 0.0f)
+	if(outerMask > 0.0)
 		localColor = ui.frameBorderColor;
 
-	if(rimMask > 0.0f)
+	if(rimMask > 0.0)
 		localColor = ui.frameFillColor;
 
-	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0f - ui.dstColor.a));
+	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0 - ui.dstColor.a));
 }
 
 bool s2h_button(inout ContextGather ui, uint widthInCharacters)
 {
 	vec4 color = ui.buttonColor;
-	const float border = 0.0f;
+	const float border = 0.0;
 
 	vec4 aabb = vec4(ui.pxCursor - vec2(widthInCharacters, 0) * s2h_fontSize() * ui.scale, ui.pxCursor);
 
@@ -744,95 +744,95 @@ bool s2h_button(inout ContextGather ui, uint widthInCharacters)
 	aabb += vec4(4, 4, -4, 4) * ui.scale;
 
 	float dist = s2h_computeDistToBox(ui, ui.pxPos, aabb) / ui.scale;
-	bool mouseOver = s2h_computeDistToBox(ui, ui.mouseInput.xy, aabb) / ui.scale < 5.0f + border;
+	bool mouseOver = s2h_computeDistToBox(ui, ui.mouseInput.xy, aabb) / ui.scale < 5.0 + border;
 
-	float rimMask = clamp(5.0f - dist + border,0.0f,1.0f);
-	float outerMask = clamp(4.0f - dist + border,0.0f,1.0f);
+	float rimMask = clamp(5.0 - dist + border,0.0,1.0);
+	float outerMask = clamp(4.0 - dist + border,0.0,1.0);
 
 	vec4 localColor = vec4(0,0,0,0);
 
-	if(mouseOver && rimMask > 0.0f)
+	if(mouseOver && rimMask > 0.0)
 		localColor = vec4(1, 1, 1, 1);
 
 	// no AA for now
-	if(outerMask > 0.0f)
+	if(outerMask > 0.0)
 		localColor = color;
 
-	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0f - ui.dstColor.a));
+	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0 - ui.dstColor.a));
 
-	vec2 delta = round(ui.mouseInput.xy + 0.5f - ui.pxPos);
+	vec2 delta = round(ui.mouseInput.xy + 0.5 - ui.pxPos);
 
-	return mouseOver && delta.x == 0.0f && delta.y == 0.0f;
+	return mouseOver && delta.x == 0.0 && delta.y == 0.0;
 }
 
 bool s2h_radioButton(inout ContextGather ui, bool checked)
 {
 	vec4 color = ui.buttonColor;
 
-	vec2 pxLocal = vec2(ui.pxPos - ui.pxCursor - 0.5f) / float(ui.scale) - vec2(3.5f, 3.5f);
+	vec2 pxLocal = vec2(ui.pxPos - ui.pxCursor - 0.5) / float(ui.scale) - vec2(3.5, 3.5);
 	float dist = length(pxLocal);
 
-	float rimMask = clamp(5.0f - dist,0.0f,1.0f);
-	float outerMask = clamp(4.0f - dist,0.0f,1.0f);
-	float innerMask = clamp(2.5f - dist,0.0f,1.0f);
+	float rimMask = clamp(5.0 - dist,0.0,1.0);
+	float outerMask = clamp(4.0 - dist,0.0,1.0);
+	float innerMask = clamp(2.5 - dist,0.0,1.0);
 
-	bool mouseOver = length(vec2(ui.mouseInput.xy - ui.pxCursor) / float(ui.scale) - vec2(3.5f, 3.5f)) < 4.0f;
+	bool mouseOver = length(vec2(ui.mouseInput.xy - ui.pxCursor) / float(ui.scale) - vec2(3.5, 3.5)) < 4.0;
 
-	if(mouseOver && rimMask > 0.0f)
+	if(mouseOver && rimMask > 0.0)
 		ui.dstColor = vec4(1, 1, 1 ,1);
 
 	// no AA for now
-	if(outerMask > 0.0f)
+	if(outerMask > 0.0)
 		ui.dstColor = mix(ui.dstColor, vec4(color.rgb, 1), color.a);
-	if(checked && innerMask > 0.0f)
+	if(checked && innerMask > 0.0)
 		ui.dstColor = mix(ui.dstColor, vec4(ui.textColor.rgb, 1), ui.textColor.a);
 
 	ui.pxCursor.x += s2h_fontSize() * ui.scale;
 
-	vec2 delta = round(ui.mouseInput.xy + 0.5f - ui.pxPos);
+	vec2 delta = round(ui.mouseInput.xy + 0.5 - ui.pxPos);
 
-	return mouseOver && delta.x == 0.0f && delta.y == 0.0f;
+	return mouseOver && delta.x == 0.0 && delta.y == 0.0;
 }
 
 bool s2h_checkBox(inout ContextGather ui, bool checked)
 {
 	vec4 color = ui.buttonColor;
 
-	vec2 pxLocal = vec2(ui.pxPos - ui.pxCursor - 0.5f) / float(ui.scale) - vec2(3.5f, 3.5f);
+	vec2 pxLocal = vec2(ui.pxPos - ui.pxCursor - 0.5) / float(ui.scale) - vec2(3.5, 3.5);
 	float dist = max(abs(pxLocal.x), abs(pxLocal.y));
 
-	float rimMask = clamp(5.0f - dist,0.0f,1.0f);
-	float outerMask = clamp(4.0f - dist,0.0f,1.0f);
-	float innerMask = clamp(2.5f - dist,0.0f,1.0f);
+	float rimMask = clamp(5.0 - dist,0.0,1.0);
+	float outerMask = clamp(4.0 - dist,0.0,1.0);
+	float innerMask = clamp(2.5 - dist,0.0,1.0);
 
-	bool mouseOver = length(vec2(ui.mouseInput.xy - ui.pxCursor) / float(ui.scale) - vec2(3.5f, 3.5f)) < 4.0f;
+	bool mouseOver = length(vec2(ui.mouseInput.xy - ui.pxCursor) / float(ui.scale) - vec2(3.5, 3.5)) < 4.0;
 
-	if(mouseOver && rimMask > 0.0f)
+	if(mouseOver && rimMask > 0.0)
 		ui.dstColor = vec4(1, 1, 1 ,1);
 
 	// no AA for now
-	if(outerMask > 0.0f)
+	if(outerMask > 0.0)
 		ui.dstColor = mix(ui.dstColor, vec4(color.rgb, 1), color.a);
-	if(checked && innerMask > 0.0f)
+	if(checked && innerMask > 0.0)
 		ui.dstColor = mix(ui.dstColor, vec4(ui.textColor.rgb, 1), ui.textColor.a);
 
 	ui.pxCursor.x += s2h_fontSize() * ui.scale;
 
-	vec2 delta = round(ui.mouseInput.xy + 0.5f - ui.pxPos);
+	vec2 delta = round(ui.mouseInput.xy + 0.5 - ui.pxPos);
 
-	return mouseOver && delta.x == 0.0f && delta.y == 0.0f;
+	return mouseOver && delta.x == 0.0 && delta.y == 0.0;
 }
 
 void s2h_progress(inout ContextGather ui, uint widthInCharacters, float fraction)
 {
 	vec4 color = ui.buttonColor;
-	vec4 outerAABB = vec4(ui.pxCursor, ui.pxCursor + vec2(float(widthInCharacters) * s2h_fontSize(), s2h_fontSize() - 2.0f) * ui.scale);
-	outerAABB += 0.5f;
+	vec4 outerAABB = vec4(ui.pxCursor, ui.pxCursor + vec2(float(widthInCharacters) * s2h_fontSize(), s2h_fontSize() - 2.0) * ui.scale);
+	outerAABB += 0.5;
 
 	// shrink
 	vec4 innerAABB = outerAABB + vec4(1, 1, -1, -1) * ui.scale;
 
-	innerAABB.z = mix(innerAABB.x, innerAABB.z, clamp(fraction,0.0f,1.0f));
+	innerAABB.z = mix(innerAABB.x, innerAABB.z, clamp(fraction,0.0,1.0));
 
 	float sliderDist = s2h_computeDistToBox(ui, ui.pxPos, outerAABB);
 	float innerDist = s2h_computeDistToBox(ui, ui.pxPos, innerAABB);
@@ -840,24 +840,24 @@ void s2h_progress(inout ContextGather ui, uint widthInCharacters, float fraction
 	vec4 localColor = vec4(0,0,0,0);
 
 	// no AA for now
-	if(sliderDist <= 0.0f)
+	if(sliderDist <= 0.0)
 		localColor = color;
 
-	if(innerDist <= 0.0f)
+	if(innerDist <= 0.0)
 		localColor = mix(localColor, vec4(ui.textColor.rgb, 1), ui.textColor.a);
 
 	ui.pxCursor.x += float(widthInCharacters) * s2h_fontSize() * ui.scale;
 
-	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0f - ui.dstColor.a));
+	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0 - ui.dstColor.a));
 }
 
 void s2h_sliderFloat(inout ContextGather ui, uint widthInCharacters, inout float value, float minValue, float maxValue)
 {
 	vec4 color = ui.buttonColor; 
-	vec4 outerAABB = vec4(ui.pxCursor, ui.pxCursor + vec2(float(widthInCharacters) * s2h_fontSize(), s2h_fontSize() - 2.0f) * ui.scale);
- 	outerAABB += 0.5f;
+	vec4 outerAABB = vec4(ui.pxCursor, ui.pxCursor + vec2(float(widthInCharacters) * s2h_fontSize(), s2h_fontSize() - 2.0) * ui.scale);
+ 	outerAABB += 0.5;
 
-	float halfChar = s2h_fontSize() / 2.0f;
+	float halfChar = s2h_fontSize() / 2.0;
  
 	// shrink 
 	vec4 innerAABB = outerAABB + vec4(1, 1, -1, -1) * ui.scale;
@@ -867,14 +867,14 @@ void s2h_sliderFloat(inout ContextGather ui, uint widthInCharacters, inout float
 	// todo: active button should be made for all UI interactive buttons (checkbox, radio, button)
 	vec2 currentMouse = (ui.s2h_State.x == 0 && ui.s2h_State.y == 0) ? ui.mouseInput.xy : vec2(ui.s2h_State.xy);
  
-	bool mouseOver = s2h_computeDistToBox(ui, currentMouse, outerAABB) <= 0.0f;
+	bool mouseOver = s2h_computeDistToBox(ui, currentMouse, outerAABB) <= 0.0;
  
 	vec3 knobColor = ui.textColor.rgb; 
 
 	// mouse over and left mouse button pressed
-	if(mouseOver && ui.mouseInput.z != 0.0f)
+	if(mouseOver && ui.mouseInput.z != 0.0)
 	{ 
-		float newFraction = clamp((ui.mouseInput.xy.x - innerAABB.x) / (innerAABB.z - innerAABB.x),0.0f,1.0f); 
+		float newFraction = clamp((ui.mouseInput.xy.x - innerAABB.x) / (innerAABB.z - innerAABB.x),0.0,1.0); 
 		value = mix(minValue, maxValue, newFraction); 
  
 		knobColor = vec3(1, 1, 1); 
@@ -884,13 +884,13 @@ void s2h_sliderFloat(inout ContextGather ui, uint widthInCharacters, inout float
 			ui.s2h_State.xy = ivec2(ui.mouseInput.xy);
 	} 
  
-	float fraction = clamp((value - minValue) / (maxValue - minValue),0.0f,1.0f);
+	float fraction = clamp((value - minValue) / (maxValue - minValue),0.0,1.0);
 
-	float knobRange = (float(widthInCharacters) - 1.0f) * s2h_fontSize() * ui.scale;
-	vec2 knobPos = ui.pxCursor + vec2(halfChar * ui.scale, 0.0f) + vec2(fraction * knobRange, 3.0f * ui.scale);
-	vec2 knobSize = vec2(s2h_fontSize() - 4.0f, s2h_fontSize() - 4.0f) * 0.5f * ui.scale;
+	float knobRange = (float(widthInCharacters) - 1.0) * s2h_fontSize() * ui.scale;
+	vec2 knobPos = ui.pxCursor + vec2(halfChar * ui.scale, 0.0) + vec2(fraction * knobRange, 3.0 * ui.scale);
+	vec2 knobSize = vec2(s2h_fontSize() - 4.0, s2h_fontSize() - 4.0) * 0.5 * ui.scale;
 	vec4 knobAABB = vec4(knobPos - knobSize, knobPos + knobSize);
- 	knobAABB += 0.5f;
+ 	knobAABB += 0.5;
 
 	float knobDist = s2h_computeDistToBox(ui, ui.pxPos, knobAABB);
 
@@ -900,85 +900,85 @@ void s2h_sliderFloat(inout ContextGather ui, uint widthInCharacters, inout float
 		localColor = vec4(1, 1, 1 ,1);
 
 	// no AA for now
-	if(sliderDist <= 0.0f)
+	if(sliderDist <= 0.0)
 		localColor = color;
 
-//	if(innerDist <= 0.0f)
+//	if(innerDist <= 0.0)
 //		localColor = lerp(localColor, float4(ui.textColor.rgb, 1), ui.textColor.a);
 
-	if(knobDist <= 0.0f)
+	if(knobDist <= 0.0)
 		localColor = mix(localColor, vec4(knobColor, 1), ui.textColor.a);
 
 	ui.pxCursor.x += float(widthInCharacters) * s2h_fontSize() * ui.scale;
 
-	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0f - ui.dstColor.a));
+	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0 - ui.dstColor.a));
 } 
 
 void s2h_sliderRGB(inout ContextGather ui, uint widthInCharacters, inout vec3 value)
 {
-	float r = 3.0f * s2h_fontSize() * 0.5f * ui.scale - 1.0f;
+	float r = 3.0 * s2h_fontSize() * 0.5 * ui.scale - 1.0;
 	vec4 backup = ui.buttonColor;
 
 	vec2 initialPos = ui.pxCursor;
-	vec2 pos = initialPos + vec2(3.0f * s2h_fontSize() * ui.scale, 0.0f);
+	vec2 pos = initialPos + vec2(3.0 * s2h_fontSize() * ui.scale, 0.0);
 
 	ui.pxCursor.x = pos.x;
-	ui.buttonColor = vec4(1,0.1f,0.1f,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.r, 0.0f, 1.0f);
+	ui.buttonColor = vec4(1,0.1,0.1,1);
+	s2h_sliderFloat(ui, widthInCharacters - 3u, value.r, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
 	ui.buttonColor = vec4(0,1,0,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.g, 0.0f, 1.0f);
+	s2h_sliderFloat(ui, widthInCharacters - 3u, value.g, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
-	ui.buttonColor = vec4(0.2f,0.2f,1,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.b, 0.0f, 1.0f);
+	ui.buttonColor = vec4(0.2,0.2,1,1);
+	s2h_sliderFloat(ui, widthInCharacters - 3u, value.b, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	// todo: don't abuse circle drawing for disk drawing
 	// todo: check if sRGB blending is right, it looks wrong with white
 	s2h_drawDisc(ui, initialPos + r, r, vec4(value, 1));
 
-	ui.pxCursor = initialPos + vec2(float(widthInCharacters) * s2h_fontSize() * ui.scale, 0.0f);
+	ui.pxCursor = initialPos + vec2(float(widthInCharacters) * s2h_fontSize() * ui.scale, 0.0);
 
 	ui.buttonColor = backup;
 }
 
 void s2h_sliderRGBA(inout ContextGather ui, uint widthInCharacters, inout vec4 value)
 {
-	float r = 3.0f * s2h_fontSize() * 0.5f * ui.scale - 1.0f;
+	float r = 3.0 * s2h_fontSize() * 0.5 * ui.scale - 1.0;
 	vec4 backup = ui.buttonColor;
 
 	vec2 initialPos = ui.pxCursor;
-	vec2 pos = initialPos + vec2(3.0f * s2h_fontSize() * ui.scale, 0.0f);
+	vec2 pos = initialPos + vec2(3.0 * s2h_fontSize() * ui.scale, 0.0);
 
 	ui.pxCursor.x = pos.x;
-	ui.buttonColor = vec4(1,0.1f,0.1f,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.r, 0.0f, 1.0f);
+	ui.buttonColor = vec4(1,0.1,0.1,1);
+	s2h_sliderFloat(ui, widthInCharacters - 3u, value.r, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
 	ui.buttonColor = vec4(0,1,0,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.g, 0.0f, 1.0f);
+	s2h_sliderFloat(ui, widthInCharacters - 3u, value.g, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
-	ui.buttonColor = vec4(0.2f,0.2f,1,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.b, 0.0f, 1.0f);
+	ui.buttonColor = vec4(0.2,0.2,1,1);
+	s2h_sliderFloat(ui, widthInCharacters - 3u, value.b, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
-	ui.buttonColor = vec4(0.5f,0.5f,0.5f,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.a, 0.0f, 1.0f);
+	ui.buttonColor = vec4(0.5,0.5,0.5,1);
+	s2h_sliderFloat(ui, widthInCharacters - 3u, value.a, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	// todo: don't abuse circle drawing for disk drawing
 	// todo: check if sRGB blending is right, it looks wrong with white
 	s2h_drawDisc(ui, initialPos + r, r, value);
 
-	ui.pxCursor = initialPos + vec2(float(widthInCharacters) * s2h_fontSize() * ui.scale, 0.0f);
+	ui.pxCursor = initialPos + vec2(float(widthInCharacters) * s2h_fontSize() * ui.scale, 0.0);
 
 	ui.buttonColor = backup;
 }
@@ -1019,13 +1019,13 @@ vec3 s2h_indexToColor(uint index)
 	uint f = index & (1u << 7u);
 	uint i = index & (1u << 8u);
 
-	return vec3(a * 4u + b * 2u + c, d * 4u + e * 2u + f, g * 4u + h * 2u + i) / 7.0f;
+	return vec3(a * 4u + b * 2u + c, d * 4u + e * 2u + f, g * 4u + h * 2u + i) / 7.0;
 }
 
 vec3 s2h_colorRampRGB(float value)
 {
 	return vec3(
-		clamp(1.0f - abs(value) * 2.0f,0.0f,1.0f),
-		clamp(1.0f - abs(value - 0.5f) * 2.0f,0.0f,1.0f),
-		clamp(1.0f - abs(value - 1.0f) * 2.0f,0.0f,1.0f));
+		clamp(1.0 - abs(value) * 2.0,0.0,1.0),
+		clamp(1.0 - abs(value - 0.5) * 2.0,0.0,1.0),
+		clamp(1.0 - abs(value - 1.0) * 2.0,0.0,1.0));
 }
