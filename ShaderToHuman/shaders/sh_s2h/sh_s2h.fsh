@@ -1019,17 +1019,17 @@ vec3 s2h_accurateSRGBToLinear(vec3 sRGBCol)
 
 vec3 s2h_indexToColor(uint index)
 {
-	uint a = index & (1 << 0);
-	uint d = index & (1 << 1);
-	uint g = index & (1 << 2);
+    uint a = bit(index,   1);
+    uint d = bit(index,   2);
+    uint g = bit(index,   4);
 
-	uint b = index & (1 << 3);
-	uint e = index & (1 << 4);
-	uint h = index & (1 << 5);
+    uint b = bit(index,   8);
+    uint e = bit(index,  16);
+    uint h = bit(index,  32);
 
-	uint c = index & (1 << 6);
-	uint f = index & (1 << 7);
-	uint i = index & (1 << 8);
+    uint c = bit(index,  64);
+    uint f = bit(index, 128);
+    uint i = bit(index, 256);
 
 	return vec3(a * 4 + b * 2 + c, d * 4 + e * 2 + f, g * 4 + h * 2 + i) / 7.0;
 }
