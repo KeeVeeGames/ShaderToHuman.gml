@@ -8,6 +8,12 @@ int imod(int x, int y)
     return x - y * (x / y);
 }
 
+// bit(n, b) = n & (1 << p), where b = 2^p
+int bit(int n, int b)
+{
+    return imod(n / b, 2);
+}
+
 //////////////////////////////////////////////////////////////////////////
 //   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
 //  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
