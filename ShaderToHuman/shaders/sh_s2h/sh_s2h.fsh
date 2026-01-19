@@ -32,6 +32,10 @@ int shift_right(int x, int n)
     return x;
 }
 
+vec2 round(vec2 v) {
+    return floor(v + 0.5);
+}
+
 //////////////////////////////////////////////////////////////////////////
 //   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
 //  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
