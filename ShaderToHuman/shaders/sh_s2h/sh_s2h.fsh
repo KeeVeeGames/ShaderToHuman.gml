@@ -2,6 +2,7 @@
 #define uint int
 #define uvec2 ivec2
 
+// imod(x, y) = x % y = x & (y - 1)
 int imod(int x, int y)
 {
     return x - y * (x / y);
@@ -254,12 +255,12 @@ bool s2h_fontLookup(uint ascii, ivec2 pxPos)
     uvec2 pixel = uvec2(chrPos.x * 8 + uint(pxPos.x), chrPos.y * 8 + uint(pxPos.y));
     uint dwordId = pixel.x / 32 + (pixel.y * 4);
     // 0..31
-    uint bitId	= uint(pixel.x) & 0x1f;
+    uint bitId	= imod(uint(pixel.x), 32);
 
     // 0..ff
     uint dwordValue = g_miniFont[dwordId];
 
-    return ((dwordValue >> (31 - bitId)) & 1) != 0;
+    return imod((dwordValue >> (31 - bitId)), 2) != 0;
 }
 
 void s2h_printCharacter(inout ContextGather ui, uint ascii)
@@ -467,7 +468,7 @@ void s2h_printHex(inout ContextGather ui, uint value)
 	for(int i = 7; i >= 0; --i)
 	{
 		// 0..15
-		uint nibble = (value >> (uint(i) * 4)) & 0xf;
+		uint nibble = imod(value >> (uint(i) * 4), 16);
 		uint start = (nibble < 10) ? _0 : (_A - 10);
 		s2h_printCharacter(ui, start + nibble);
 	}
