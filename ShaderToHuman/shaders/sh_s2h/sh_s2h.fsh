@@ -175,54 +175,54 @@ const float S2H_FLT_MAX = intBitsToFloat(2139095039);
 uniform int g_miniFont[192];
 
 // const uint g_miniFont[] = uint[](
-//     0x00306c6cu, 0x30003860u, 0x18600000u, 0x00000006u, 
-//     0x00786c6cu, 0x7cc66c60u, 0x30306630u, 0x0000000cu, 
-//     0x00786cfeu, 0xc0cc38c0u, 0x60183c30u, 0x00000018u, 
-//     0x0030006cu, 0x78187600u, 0x6018fffcu, 0x00fc0030u, 
-//     0x003000feu, 0x0c30dc00u, 0x60183c30u, 0x00000060u, 
-//     0x0000006cu, 0xf866cc00u, 0x30306630u, 0x300030c0u, 
-//     0x0030006cu, 0x30c67600u, 0x18600000u, 0x30003080u, 
-//     0x00000000u, 0x00000000u, 0x00000000u, 0x60000000u, 
-//     0x7c307878u, 0x1cfc38fcu, 0x78780000u, 0x18006078u, 
-//     0xc670ccccu, 0x3cc060ccu, 0xcccc3030u, 0x300030ccu, 
-//     0xce300c0cu, 0x6cf8c00cu, 0xcccc3030u, 0x60fc180cu, 
-//     0xde303838u, 0xcc0cf818u, 0x787c0000u, 0xc0000c18u, 
-//     0xf630600cu, 0xfe0ccc30u, 0xcc0c0000u, 0x60001830u, 
-//     0xe630ccccu, 0x0ccccc30u, 0xcc183030u, 0x30fc3000u, 
-//     0x7cfcfc78u, 0x1e787830u, 0x78703030u, 0x18006030u, 
-//     0x00000000u, 0x00000000u, 0x00000060u, 0x00000000u, 
-//     0x7c30fc3cu, 0xf8fefe3cu, 0xcc781ee6u, 0xf0c6c638u, 
-//     0xc6786666u, 0x6c626266u, 0xcc300c66u, 0x60eee66cu, 
-//     0xdecc66c0u, 0x666868c0u, 0xcc300c6cu, 0x60fef6c6u, 
-//     0xdecc7cc0u, 0x667878c0u, 0xfc300c78u, 0x60fedec6u,
-//     0xdefc66c0u, 0x666868ceu, 0xcc30cc6cu, 0x62d6cec6u,
-//     0xc0cc6666u, 0x6c626066u, 0xcc30cc66u, 0x66c6c66cu,
-//     0x78ccfc3cu, 0xf8fef03eu, 0xcc7878e6u, 0xfec6c638u,
-//     0x00000000u, 0x00000000u, 0x00000000u, 0x00000000u,
-//     0xfc78fc78u, 0xfcccccc6u, 0xc6ccfe78u, 0xc0781000u,
-//     0x66cc66ccu, 0xb4ccccc6u, 0xc6ccc660u, 0x60183800u,
-//     0x66cc66e0u, 0x30ccccc6u, 0x6ccc8c60u, 0x30186c00u,
-//     0x7ccc7c70u, 0x30ccccd6u, 0x38781860u, 0x1818c600u,
-//     0x60dc6c1cu, 0x30ccccfeu, 0x38303260u, 0x0c180000u,
-//     0x607866ccu, 0x30cc78eeu, 0x6c306660u, 0x06180000u,
-//     0xf01ce678u, 0x78fc30c6u, 0xc678fe78u, 0x02780000u,
-//     0x00000000u, 0x00000000u, 0x00000000u, 0x000000ffu,
-//     0x3000e000u, 0x1c003800u, 0xe0300ce0u, 0x70000000u, 
-//     0x30006000u, 0x0c006c00u, 0x60000060u, 0x30000000u, 
-//     0x18786078u, 0x0c786076u, 0x6c700c66u, 0x30ccf878u, 
-//     0x000c7cccu, 0x7cccf0ccu, 0x76300c6cu, 0x30feccccu, 
-//     0x007c66c0u, 0xccfc60ccu, 0x66300c78u, 0x30feccccu, 
-//     0x00cc66ccu, 0xccc0607cu, 0x6630cc6cu, 0x30d6ccccu, 
-//     0x0076dc78u, 0x7678f00cu, 0xe678cce6u, 0x78c6cc78u, 
-//     0x00000000u, 0x000000f8u, 0x00007800u, 0x00000000u, 
-//     0x00000000u, 0x10000000u, 0x0000001cu, 0x18e076ffu, 
-//     0x00000000u, 0x30000000u, 0x00000030u, 0x1830dcffu, 
-//     0xdc76dc7cu, 0x7cccccc6u, 0xc6ccfc30u, 0x183000ffu,
-//     0x66cc76c0u, 0x30ccccd6u, 0x6ccc98e0u, 0x001c00ffu, 
-//     0x66cc6678u, 0x30ccccfeu, 0x38cc3030u, 0x183000ffu, 
-//     0x7c7c600cu, 0x34cc78feu, 0x6c7c6430u, 0x183000ffu, 
-//     0x600cf0f8u, 0x1876306cu, 0xc60cfc1cu, 0x18e000ffu, 
-//     0xf01e0000u, 0x00000000u, 0x00f80000u, 0x000000ffu
+//     0x00306c6c, 0x30003860, 0x18600000, 0x00000006, 
+//     0x00786c6c, 0x7cc66c60, 0x30306630, 0x0000000c, 
+//     0x00786cfe, 0xc0cc38c0, 0x60183c30, 0x00000018, 
+//     0x0030006c, 0x78187600, 0x6018fffc, 0x00fc0030, 
+//     0x003000fe, 0x0c30dc00, 0x60183c30, 0x00000060, 
+//     0x0000006c, 0xf866cc00, 0x30306630, 0x300030c0, 
+//     0x0030006c, 0x30c67600, 0x18600000, 0x30003080, 
+//     0x00000000, 0x00000000, 0x00000000, 0x60000000, 
+//     0x7c307878, 0x1cfc38fc, 0x78780000, 0x18006078, 
+//     0xc670cccc, 0x3cc060cc, 0xcccc3030, 0x300030cc, 
+//     0xce300c0c, 0x6cf8c00c, 0xcccc3030, 0x60fc180c, 
+//     0xde303838, 0xcc0cf818, 0x787c0000, 0xc0000c18, 
+//     0xf630600c, 0xfe0ccc30, 0xcc0c0000, 0x60001830, 
+//     0xe630cccc, 0x0ccccc30, 0xcc183030, 0x30fc3000, 
+//     0x7cfcfc78, 0x1e787830, 0x78703030, 0x18006030, 
+//     0x00000000, 0x00000000, 0x00000060, 0x00000000, 
+//     0x7c30fc3c, 0xf8fefe3c, 0xcc781ee6, 0xf0c6c638, 
+//     0xc6786666, 0x6c626266, 0xcc300c66, 0x60eee66c, 
+//     0xdecc66c0, 0x666868c0, 0xcc300c6c, 0x60fef6c6, 
+//     0xdecc7cc0, 0x667878c0, 0xfc300c78, 0x60fedec6,
+//     0xdefc66c0, 0x666868ce, 0xcc30cc6c, 0x62d6cec6,
+//     0xc0cc6666, 0x6c626066, 0xcc30cc66, 0x66c6c66c,
+//     0x78ccfc3c, 0xf8fef03e, 0xcc7878e6, 0xfec6c638,
+//     0x00000000, 0x00000000, 0x00000000, 0x00000000,
+//     0xfc78fc78, 0xfcccccc6, 0xc6ccfe78, 0xc0781000,
+//     0x66cc66cc, 0xb4ccccc6, 0xc6ccc660, 0x60183800,
+//     0x66cc66e0, 0x30ccccc6, 0x6ccc8c60, 0x30186c00,
+//     0x7ccc7c70, 0x30ccccd6, 0x38781860, 0x1818c600,
+//     0x60dc6c1c, 0x30ccccfe, 0x38303260, 0x0c180000,
+//     0x607866cc, 0x30cc78ee, 0x6c306660, 0x06180000,
+//     0xf01ce678, 0x78fc30c6, 0xc678fe78, 0x02780000,
+//     0x00000000, 0x00000000, 0x00000000, 0x000000ff,
+//     0x3000e000, 0x1c003800, 0xe0300ce0, 0x70000000, 
+//     0x30006000, 0x0c006c00, 0x60000060, 0x30000000, 
+//     0x18786078, 0x0c786076, 0x6c700c66, 0x30ccf878, 
+//     0x000c7ccc, 0x7cccf0cc, 0x76300c6c, 0x30fecccc, 
+//     0x007c66c0, 0xccfc60cc, 0x66300c78, 0x30fecccc, 
+//     0x00cc66cc, 0xccc0607c, 0x6630cc6c, 0x30d6cccc, 
+//     0x0076dc78, 0x7678f00c, 0xe678cce6, 0x78c6cc78, 
+//     0x00000000, 0x000000f8, 0x00007800, 0x00000000, 
+//     0x00000000, 0x10000000, 0x0000001c, 0x18e076ff, 
+//     0x00000000, 0x30000000, 0x00000030, 0x1830dcff, 
+//     0xdc76dc7c, 0x7cccccc6, 0xc6ccfc30, 0x183000ff,
+//     0x66cc76c0, 0x30ccccd6, 0x6ccc98e0, 0x001c00ff, 
+//     0x66cc6678, 0x30ccccfe, 0x38cc3030, 0x183000ff, 
+//     0x7c7c600c, 0x34cc78fe, 0x6c7c6430, 0x183000ff, 
+//     0x600cf0f8, 0x1876306c, 0xc60cfc1c, 0x18e000ff, 
+//     0xf01e0000, 0x00000000, 0x00f80000, 0x000000ff
 // );
 
 // todo: consider define or static cost int or float
@@ -236,25 +236,25 @@ float s2h_fontSize() { return 8.0; }
 // @return true if there should be a pixel, false if not or outside the valid range
 bool s2h_fontLookup(uint ascii, ivec2 pxPos)
 {
-	if(uint(pxPos.x) >= 8u || uint(pxPos.y) >= 8u)
+	if(uint(pxPos.x) >= 8 || uint(pxPos.y) >= 8)
         return false;
 
-    if (ascii <= 32u || ascii > 127u)
+    if (ascii <= 32 || ascii > 127)
         return false;
 
     // 0..16*6-1
-    uint chr = ascii - 32u;
+    uint chr = ascii - 32;
     // uint2(0..127, 0..47) 
-    uvec2 chrPos = uvec2(chr % 16u, chr / 16u);
-    uvec2 pixel = uvec2(chrPos.x * 8u + uint(pxPos.x), chrPos.y * 8u + uint(pxPos.y));
-    uint dwordId = pixel.x / 32u + (pixel.y * 4u);
+    uvec2 chrPos = uvec2(chr % 16, chr / 16);
+    uvec2 pixel = uvec2(chrPos.x * 8 + uint(pxPos.x), chrPos.y * 8 + uint(pxPos.y));
+    uint dwordId = pixel.x / 32 + (pixel.y * 4);
     // 0..31
-    uint bitId	= uint(pixel.x) & 0x1fu;
+    uint bitId	= uint(pixel.x) & 0x1f;
 
     // 0..ff
     uint dwordValue = g_miniFont[dwordId];
 
-    return ((dwordValue >> (31u - bitId)) & 1u) != 0u;
+    return ((dwordValue >> (31 - bitId)) & 1) != 0;
 }
 
 void s2h_printCharacter(inout ContextGather ui, uint ascii)
@@ -267,84 +267,84 @@ void s2h_printCharacter(inout ContextGather ui, uint ascii)
 	ui.pxCursor.x += s2h_fontSize() * ui.scale;
 }
 
-const uint _A = 65u;
-const uint _B = 66u;
-const uint _C = 67u;
-const uint _D = 68u;
-const uint _E = 69u;
-const uint _F = 70u;
-const uint _G = 71u;
-const uint _H = 72u;
-const uint _I = 73u;
-const uint _J = 74u;
-const uint _K = 75u;
-const uint _L = 76u;
-const uint _M = 77u;
-const uint _N = 78u;
-const uint _O = 79u;
-const uint _P = 80u;
-const uint _Q = 81u;
-const uint _R = 82u;
-const uint _S = 83u;
-const uint _T = 84u;
-const uint _U = 85u;
-const uint _V = 86u;
-const uint _W = 87u;
-const uint _X = 88u;
-const uint _Y = 89u;
-const uint _Z = 90u;
+const uint _A = 65;
+const uint _B = 66;
+const uint _C = 67;
+const uint _D = 68;
+const uint _E = 69;
+const uint _F = 70;
+const uint _G = 71;
+const uint _H = 72;
+const uint _I = 73;
+const uint _J = 74;
+const uint _K = 75;
+const uint _L = 76;
+const uint _M = 77;
+const uint _N = 78;
+const uint _O = 79;
+const uint _P = 80;
+const uint _Q = 81;
+const uint _R = 82;
+const uint _S = 83;
+const uint _T = 84;
+const uint _U = 85;
+const uint _V = 86;
+const uint _W = 87;
+const uint _X = 88;
+const uint _Y = 89;
+const uint _Z = 90;
 
-const uint _a = (_A + 32u);
-const uint _b = (_B + 32u);
-const uint _c = (_C + 32u);
-const uint _d = (_D + 32u);
-const uint _e = (_E + 32u);
-const uint _f = (_F + 32u);
-const uint _g = (_G + 32u);
-const uint _h = (_H + 32u);
-const uint _i = (_I + 32u);
-const uint _j = (_J + 32u);
-const uint _k = (_K + 32u);
-const uint _l = (_L + 32u);
-const uint _m = (_M + 32u);
-const uint _n = (_N + 32u);
-const uint _o = (_O + 32u);
-const uint _p = (_P + 32u);
-const uint _q = (_Q + 32u);
-const uint _r = (_R + 32u);
-const uint _s = (_S + 32u);
-const uint _t = (_T + 32u);
-const uint _u = (_U + 32u);
-const uint _v = (_V + 32u);
-const uint _w = (_W + 32u);
-const uint _x = (_X + 32u);
-const uint _y = (_Y + 32u);
-const uint _z = (_Z + 32u);
+const uint _a = (_A + 32);
+const uint _b = (_B + 32);
+const uint _c = (_C + 32);
+const uint _d = (_D + 32);
+const uint _e = (_E + 32);
+const uint _f = (_F + 32);
+const uint _g = (_G + 32);
+const uint _h = (_H + 32);
+const uint _i = (_I + 32);
+const uint _j = (_J + 32);
+const uint _k = (_K + 32);
+const uint _l = (_L + 32);
+const uint _m = (_M + 32);
+const uint _n = (_N + 32);
+const uint _o = (_O + 32);
+const uint _p = (_P + 32);
+const uint _q = (_Q + 32);
+const uint _r = (_R + 32);
+const uint _s = (_S + 32);
+const uint _t = (_T + 32);
+const uint _u = (_U + 32);
+const uint _v = (_V + 32);
+const uint _w = (_W + 32);
+const uint _x = (_X + 32);
+const uint _y = (_Y + 32);
+const uint _z = (_Z + 32);
 
-const uint _SINGLEQUOTE = 39u;   // '
-const uint _UNDERSCORE = 95u;    // _
-const uint _MINUS = 45u;         // -
-const uint _PLUS = 43u;          // +
-const uint _ASTERISK = 42u;      // *
-const uint _PERIOD = 46u;        // .
-const uint _COLON = 58u;         // :
-const uint _COMMA = 44u;         // ,
-const uint _SPACE = 32u;         //  
-const uint _LESS = 60u;          // <
-const uint _EQUAL = 61u;         // =
-const uint _GREATER = 62u;       // >
-const uint _SLASH = 47u;         // /
-const uint _BACKSLASH = 92u;     //
-const uint _0 = 48u;
-const uint _1 = 49u;
-const uint _2 = 50u;
-const uint _3 = 51u;
-const uint _4 = 52u;
-const uint _5 = 53u;
-const uint _6 = 54u;
-const uint _7 = 55u;
-const uint _8 = 56u;
-const uint _9 = 57u;
+const uint _SINGLEQUOTE = 39;   // '
+const uint _UNDERSCORE = 95;    // _
+const uint _MINUS = 45;         // -
+const uint _PLUS = 43;          // +
+const uint _ASTERISK = 42;      // *
+const uint _PERIOD = 46;        // .
+const uint _COLON = 58;         // :
+const uint _COMMA = 44;         // ,
+const uint _SPACE = 32;         //  
+const uint _LESS = 60;          // <
+const uint _EQUAL = 61;         // =
+const uint _GREATER = 62;       // >
+const uint _SLASH = 47;         // /
+const uint _BACKSLASH = 92;     //
+const uint _0 = 48;
+const uint _1 = 49;
+const uint _2 = 50;
+const uint _3 = 51;
+const uint _4 = 52;
+const uint _5 = 53;
+const uint _6 = 54;
+const uint _7 = 55;
+const uint _8 = 56;
+const uint _9 = 57;
 const int _S2H_VERSION = 11;
 
 void s2h_init(out ContextGather ui, vec2 inPxPos)
@@ -431,21 +431,21 @@ void s2h_printInt(inout ContextGather ui, int value)
 	// move to right depending on number length
 	{
 		uint tmp = uint(value);
-		while (tmp != 0u)
+		while (tmp != 0)
 		{
 			ui.pxCursor.x += s2h_fontSize() * ui.scale;
-			tmp /= 10u;
+			tmp /= 10;
 		}
 	}
 	// digits
 	{
 		float backup = ui.pxCursor.x;
 		uint tmp = uint(value);
-		while (tmp != 0u)
+		while (tmp != 0)
 		{
 			// 0..9
-			uint digit = tmp % 10u;
-			tmp /= 10u;
+			uint digit = tmp % 10;
+			tmp /= 10;
 			// go backwards
 			ui.pxCursor.x -= s2h_fontSize() * ui.scale;
 			s2h_printCharacter(ui, _0 + digit);
@@ -462,8 +462,8 @@ void s2h_printHex(inout ContextGather ui, uint value)
 	for(int i = 7; i >= 0; --i)
 	{
 		// 0..15
-		uint nibble = (value >> (uint(i) * 4u)) & 0xfu;
-		uint start = (nibble < 10u) ? _0 : (_A - 10u);
+		uint nibble = (value >> (uint(i) * 4)) & 0xf;
+		uint start = (nibble < 10) ? _0 : (_A - 10);
 		s2h_printCharacter(ui, start + nibble);
 	}
 }
@@ -475,12 +475,12 @@ void s2h_printFloat(inout ContextGather ui, float value)
 
 	s2h_printCharacter(ui, _PERIOD);
 
-	uint digitCount = 3u;
+	uint digitCount = 3;
 
 	// todo: unit tests, this is likely wrong at lower precision
 
 	// fractional digits
-	for(uint i = 0u; i < digitCount; ++i)
+	for(uint i = 0; i < digitCount; ++i)
 	{
 		fractional *= 10.0;
 		// 0..9
@@ -924,17 +924,17 @@ void s2h_sliderRGB(inout ContextGather ui, uint widthInCharacters, inout vec3 va
 
 	ui.pxCursor.x = pos.x;
 	ui.buttonColor = vec4(1,0.1,0.1,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.r, 0.0, 1.0);
+	s2h_sliderFloat(ui, widthInCharacters - 3, value.r, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
 	ui.buttonColor = vec4(0,1,0,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.g, 0.0, 1.0);
+	s2h_sliderFloat(ui, widthInCharacters - 3, value.g, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
 	ui.buttonColor = vec4(0.2,0.2,1,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.b, 0.0, 1.0);
+	s2h_sliderFloat(ui, widthInCharacters - 3, value.b, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	// todo: don't abuse circle drawing for disk drawing
@@ -956,22 +956,22 @@ void s2h_sliderRGBA(inout ContextGather ui, uint widthInCharacters, inout vec4 v
 
 	ui.pxCursor.x = pos.x;
 	ui.buttonColor = vec4(1,0.1,0.1,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.r, 0.0, 1.0);
+	s2h_sliderFloat(ui, widthInCharacters - 3, value.r, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
 	ui.buttonColor = vec4(0,1,0,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.g, 0.0, 1.0);
+	s2h_sliderFloat(ui, widthInCharacters - 3, value.g, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
 	ui.buttonColor = vec4(0.2,0.2,1,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.b, 0.0, 1.0);
+	s2h_sliderFloat(ui, widthInCharacters - 3, value.b, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	ui.pxCursor.x = pos.x;
 	ui.buttonColor = vec4(0.5,0.5,0.5,1);
-	s2h_sliderFloat(ui, widthInCharacters - 3u, value.a, 0.0, 1.0);
+	s2h_sliderFloat(ui, widthInCharacters - 3, value.a, 0.0, 1.0);
 	s2h_printLF(ui);
 
 	// todo: don't abuse circle drawing for disk drawing
@@ -1007,19 +1007,19 @@ vec3 s2h_accurateSRGBToLinear(vec3 sRGBCol)
 
 vec3 s2h_indexToColor(uint index)
 {
-	uint a = index & (1u << 0u);
-	uint d = index & (1u << 1u);
-	uint g = index & (1u << 2u);
+	uint a = index & (1 << 0);
+	uint d = index & (1 << 1);
+	uint g = index & (1 << 2);
 
-	uint b = index & (1u << 3u);
-	uint e = index & (1u << 4u);
-	uint h = index & (1u << 5u);
+	uint b = index & (1 << 3);
+	uint e = index & (1 << 4);
+	uint h = index & (1 << 5);
 
-	uint c = index & (1u << 6u);
-	uint f = index & (1u << 7u);
-	uint i = index & (1u << 8u);
+	uint c = index & (1 << 6);
+	uint f = index & (1 << 7);
+	uint i = index & (1 << 8);
 
-	return vec3(a * 4u + b * 2u + c, d * 4u + e * 2u + f, g * 4u + h * 2u + i) / 7.0;
+	return vec3(a * 4 + b * 2 + c, d * 4 + e * 2 + f, g * 4 + h * 2 + i) / 7.0;
 }
 
 vec3 s2h_colorRampRGB(float value)
