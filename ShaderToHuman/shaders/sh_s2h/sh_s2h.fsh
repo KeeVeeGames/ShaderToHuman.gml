@@ -1063,3 +1063,5 @@ vec3 s2h_colorRampRGB(float value)
 		clamp(1.0 - abs(value - 0.5) * 2.0,0.0,1.0),
 		clamp(1.0 - abs(value - 1.0) * 2.0,0.0,1.0));
 }
+
+void main() {}
