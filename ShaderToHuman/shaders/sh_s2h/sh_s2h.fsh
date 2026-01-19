@@ -168,7 +168,7 @@ vec3 s2h_colorRampRGB(float value);
 
 // implementation ----------------------------------------------------------------------
 
-const float S2H_FLT_MAX = intBitsToFloat(2139095039);
+const float S2H_FLT_MAX = 3.40282347e+38;
 
 // You can define this to provide your own font (different size, visual or better lookup performance by using a texture)
 
