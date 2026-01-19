@@ -250,7 +250,7 @@ bool s2h_fontLookup(uint ascii, ivec2 pxPos)
     // 0..16*6-1
     uint chr = ascii - 32;
     // uint2(0..127, 0..47) 
-    uvec2 chrPos = uvec2(chr % 16, chr / 16);
+    uvec2 chrPos = uvec2(imod(chr, 16), chr / 16);
     uvec2 pixel = uvec2(chrPos.x * 8 + uint(pxPos.x), chrPos.y * 8 + uint(pxPos.y));
     uint dwordId = pixel.x / 32 + (pixel.y * 4);
     // 0..31
@@ -449,7 +449,7 @@ void s2h_printInt(inout ContextGather ui, int value)
 		while (tmp != 0)
 		{
 			// 0..9
-			uint digit = tmp % 10;
+			uint digit = imod(tmp, 10);
 			tmp /= 10;
 			// go backwards
 			ui.pxCursor.x -= s2h_fontSize() * ui.scale;
