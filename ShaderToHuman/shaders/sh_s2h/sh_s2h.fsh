@@ -14,6 +14,24 @@ int bit(int n, int b)
     return imod(n / b, 2);
 }
 
+// shift_left(x, n) = x << n = x * 2^n
+int shift_left(int x, int n)
+{
+    for (int i = 0; i < n; i++) {
+        x *= 2;
+    }
+    return x;
+}
+
+// shift_right(x, n) = x >> n = x / 2^n
+int shift_right(int x, int n)
+{
+    for (int i = 0; i < n; i++) {
+        x /= 2;
+    }
+    return x;
+}
+
 //////////////////////////////////////////////////////////////////////////
 //   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
 //  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
