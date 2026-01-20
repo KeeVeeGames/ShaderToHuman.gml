@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"sh_test",
+  "name":"sh_test",
+  "parent":{
+    "name":"ShaderToHuman",
+    "path":"ShaderToHuman.yyp",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}
