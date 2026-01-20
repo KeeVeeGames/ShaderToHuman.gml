@@ -36,6 +36,27 @@ vec2 round(vec2 v) {
     return floor(v + 0.5);
 }
 
+// use texture font instead, as int-uint differences are breaking the font rendering
+uniform sampler2D s2h_fontTexture;
+bool s2h_fontLookup(int ascii, ivec2 pxPos)
+{
+    if (pxPos.x < 0 || pxPos.x >= 8 ||
+        pxPos.y < 0 || pxPos.y >= 8)
+        return false;
+
+    if (ascii <= 32 || ascii > 127)
+        return false;
+
+    int chr = ascii - 32;
+
+    ivec2 chrPos = ivec2(imod(chr, 16), chr / 16);
+    ivec2 texel  = chrPos * 8 + pxPos;
+
+    vec2 uv = (vec2(texel) + 0.5) / vec2(128.0, 48.0);
+
+    return texture2D(s2h_fontTexture, uv).r > 0.5;
+}
+
 //////////////////////////////////////////////////////////////////////////
 //   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
 //  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
@@ -206,7 +227,7 @@ const float S2H_FLT_MAX = 3.40282347e+38;
 
 // You can define this to provide your own font (different size, visual or better lookup performance by using a texture)
 
-uniform int g_miniFont[192];
+// uniform int g_miniFont[192];
 
 // const uint g_miniFont[] = uint[](
 //     0x00306c6c, 0x30003860, 0x18600000, 0x00000006, 
@@ -268,28 +289,28 @@ float s2h_fontSize() { return 8.0; }
 // @param ascii 32..127 are valid characters
 // @param pxPos int2(0..s2h_fontSize()-1, 0..s2h_fontSize-1)
 // @return true if there should be a pixel, false if not or outside the valid range
-bool s2h_fontLookup(uint ascii, ivec2 pxPos)
-{
-	if(uint(pxPos.x) >= 8 || uint(pxPos.y) >= 8)
-        return false;
-
-    if (ascii <= 32 || ascii > 127)
-        return false;
-
-    // 0..16*6-1
-    uint chr = ascii - 32;
-    // uint2(0..127, 0..47) 
-    uvec2 chrPos = uvec2(imod(chr, 16), chr / 16);
-    uvec2 pixel = uvec2(chrPos.x * 8 + uint(pxPos.x), chrPos.y * 8 + uint(pxPos.y));
-    uint dwordId = pixel.x / 32 + (pixel.y * 4);
-    // 0..31
-    uint bitId	= imod(uint(pixel.x), 32);
-
-    // 0..ff
-    uint dwordValue = g_miniFont[dwordId];
-
-    return imod(shift_right(dwordValue, (31 - bitId)), 2) != 0;
-}
+// bool s2h_fontLookup(uint ascii, ivec2 pxPos)
+// {
+// 	if(uint(pxPos.x) >= 8 || uint(pxPos.y) >= 8)
+//         return false;
+//
+//     if (ascii <= 32 || ascii > 127)
+//         return false;
+//
+//     // 0..16*6-1
+//     uint chr = ascii - 32;
+//     // uint2(0..127, 0..47) 
+//     uvec2 chrPos = uvec2(imod(chr, 16), chr / 16);
+//     uvec2 pixel = uvec2(chrPos.x * 8 + uint(pxPos.x), chrPos.y * 8 + uint(pxPos.y));
+//     uint dwordId = pixel.x / 32 + (pixel.y * 4);
+//     // 0..31
+//     uint bitId	= imod(uint(pixel.x), 32);
+//
+//     // 0..ff
+//     uint dwordValue = g_miniFont[dwordId];
+//
+//     return imod(shift_right(dwordValue, (31 - bitId)), 2) != 0;
+// }
 
 void s2h_printCharacter(inout ContextGather ui, uint ascii)
 {
