@@ -23,6 +23,7 @@
   "resources":[
     {"id":{"name":"Shady","path":"extensions/Shady/Shady.yy",},},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},},
+    {"id":{"name":"ShaderMouse","path":"scripts/ShaderMouse/ShaderMouse.yy",},},
     {"id":{"name":"sh_s2h","path":"shaders/sh_s2h/sh_s2h.yy",},},
     {"id":{"name":"spr_s2h_font","path":"sprites/spr_s2h_font/spr_s2h_font.yy",},},
   ],
