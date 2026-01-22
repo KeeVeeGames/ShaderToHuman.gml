@@ -25,7 +25,7 @@ struct Context3D
 };
 //
 void s2h_init(out Context3D context, vec3 ro, vec3 rd);
-// @param thickness e.g. 0.09f
+// @param thickness e.g. 0.09
 void s2h_drawLineWS(inout Context3D context, vec3 from, vec3 to, vec4 color, float thickness);
 // AABB: Axis Aligned Bounding Box
 void s2h_drawAABB(inout Context3D context, vec3 center, vec3 halfSize, vec4 color);
@@ -34,7 +34,7 @@ void s2h_drawArrowWS(inout Context3D context, vec3 from, vec3 to, vec4 color, fl
 // @param worldFromObject aka objectToWorld
 // @param r in world space units
 void s2h_drawBasis(inout Context3D context, mat4 worldFromObject, float r);
-// @param radius e.g. 0.1f
+// @param radius e.g. 0.1
 void s2h_drawSphereWS(inout Context3D context, vec3 pos, vec4 color, float radius);
 // 8x8 checker board with X (red) and Z (blue) around offset pointing up (Y+)
 void s2h_drawCheckerBoard(inout Context3D context, vec3 offset);
@@ -170,11 +170,11 @@ void s2h_drawAABB(inout Context3D context, vec3 center, vec3 halfSize, vec4 colo
     vec3 normal;
     vec2 hit = s2h_boxIntersection(context.ro - center, context.rd, halfSize, normal);
 
-    if(hit.y > 0.0f && hit.x < context.depth)
+    if(hit.y > 0.0 && hit.x < context.depth)
     {
         context.depth = hit.x;
         context.dstColor = color;
-        context.dstColor = mix(context.dstColor, vec4(normal * 0.5f + 0.5f, 1), 0.3f);
+        context.dstColor = mix(context.dstColor, vec4(normal * 0.5 + 0.5, 1), 0.3);
     }
 }
 
@@ -188,14 +188,14 @@ void s2h_drawLineWS(inout Context3D context, vec3 from, vec3 to, vec4 color, flo
         vec3 p = context.ro + context.depth * context.rd;
         vec3 normal = s2h_cylNormal(p, from, to, thickness);
         // todo: refine shading
-        color.rgb = mix(color.rgb, normal * 0.5f + 0.5f, 0.3f);
+        color.rgb = mix(color.rgb, normal * 0.5 + 0.5, 0.3);
         context.dstColor = color;
     }
 }
 
 void s2h_drawArrowWS(inout Context3D context, vec3 from, vec3 to, vec4 color, float thickness)
 {
-    vec4 hit = s2h_coneIntersect(context.ro, context.rd, from, to, thickness, 0.0f);
+    vec4 hit = s2h_coneIntersect(context.ro, context.rd, from, to, thickness, 0.0);
 
     if(hit.x > 0.0 && hit.x < context.depth)
     {
@@ -219,9 +219,9 @@ void s2h_drawBasis(inout Context3D context, mat4 worldFromObject, float r)
     vec3 y = yHom.xyz / yHom.w;
     vec3 z = zHom.xyz / zHom.w;
 
-    s2h_drawArrowWS(context, o, x, vec4(1, 0, 0, 1), 0.09f);
-    s2h_drawArrowWS(context, o, y, vec4(0, 1, 0, 1), 0.09f);
-    s2h_drawArrowWS(context, o, z, vec4(0, 0, 1, 1), 0.09f);
+    s2h_drawArrowWS(context, o, x, vec4(1, 0, 0, 1), 0.09);
+    s2h_drawArrowWS(context, o, y, vec4(0, 1, 0, 1), 0.09);
+    s2h_drawArrowWS(context, o, z, vec4(0, 0, 1, 1), 0.09);
 }
 
 void s2h_drawSphereWS(inout Context3D context, vec3 pos, vec4 color, float radius)
@@ -247,28 +247,28 @@ void s2h_drawCheckerBoard(inout Context3D context, vec3 offset)
     vec3 normal;
     vec2 hit = s2h_boxIntersection(context.ro - pos, context.rd, size, normal);
 
-    if(hit.y > 0.0f && hit.x < context.depth)
+    if(hit.y > 0.0 && hit.x < context.depth)
     {
         context.depth = hit.x;
 
         vec3 hitPos = context.ro + hit.x * context.rd;
         vec2 uv = hitPos.zx;
 
-        float value = 1.0f;
+        float value = 1.0;
                 
-        if(abs(uv.x) < 4.0f && abs(uv.y) < 4.0f)
-            value = fract(floor(uv.x) * 0.5f + floor(uv.y) * 0.5f) > 0.25f ? 0.4f : 0.6f;
+        if(abs(uv.x) < 4.0 && abs(uv.y) < 4.0)
+            value = fract(floor(uv.x) * 0.5 + floor(uv.y) * 0.5) > 0.25 ? 0.4 : 0.6;
 
         context.dstColor = vec4(value, value, value, 1);
 
-        if(abs(uv.x) < (4.0f - uv.y) * 0.1f && uv.y > 0.0f)
+        if(abs(uv.x) < (4.0 - uv.y) * 0.1 && uv.y > 0.0)
             context.dstColor.rgb = vec3(1,0,0);
-        if(abs(uv.y) < (4.0f - uv.x) * 0.1f && uv.x > 0.0f)
+        if(abs(uv.y) < (4.0 - uv.x) * 0.1 && uv.x > 0.0)
             context.dstColor.rgb = vec3(0,0,1);
-        if(dot(uv, uv) < 0.25f)
+        if(dot(uv, uv) < 0.25)
             context.dstColor.rgb = vec3(0,1,0);
 
-        context.dstColor = mix(context.dstColor, vec4(normal * 0.5f + 0.5f, 1), 0.3f);
+        context.dstColor = mix(context.dstColor, vec4(normal * 0.5 + 0.5, 1), 0.3);
     }
 }
 
@@ -278,7 +278,7 @@ void s2h_drawSkybox(inout Context3D context)
 	{
 		vec3 d = context.rd;
 
-		float pi = 3.14159265f;
+		float pi = 3.14159265;
 
 		// assuming normalized rd
 		vec2 uv = vec2(-atan(d.z, d.x) / pi + 1.0, acos(d.y) / pi);
@@ -289,28 +289,28 @@ void s2h_drawSkybox(inout Context3D context)
 
 		// 4*4 characters around the x axis
 		ContextGather ui;
-		s2h_init(ui, vec2(fract(px.x / tileX + 0.5f) * tileX, px.y));
+		s2h_init(ui, vec2(fract(px.x / tileX + 0.5) * tileX, px.y));
 
 		// horizon
-		ui.dstColor.rgb = vec3(1,1,1) * clamp(1.0f - pow(abs(d.y), 0.2f),0.0f,1.0f);
-		ui.dstColor.a = 1.0f;
+		ui.dstColor.rgb = vec3(1,1,1) * clamp(1.0 - pow(abs(d.y), 0.2),0.0,1.0);
+		ui.dstColor.a = 1.0;
 
 		// grid
 		{
 			vec2 gridXY = fract(ui.pxPos);
-			gridXY = min(gridXY, vec2(1.0f, 1.0f) - gridXY);
+			gridXY = min(gridXY, vec2(1.0, 1.0) - gridXY);
 			// 0 .. 0.5
 			float grid = min(gridXY.x, gridXY.y);
-			ui.dstColor.rgb = mix(ui.dstColor.rgb, vec3(1,1,1), 0.07f * clamp(1.0f - grid * 30.0f,0.0f,1.0f));
+			ui.dstColor.rgb = mix(ui.dstColor.rgb, vec3(1,1,1), 0.07 * clamp(1.0 - grid * 30.0,0.0,1.0));
 		}
 
 		bool xzAxis = abs(d.x) > abs(d.z);
 
-		bool posAxis = xzAxis ? (d.x > 0.0f) : (d.z > 0.0f);
+		bool posAxis = xzAxis ? (d.x > 0.0) : (d.z > 0.0);
 
 		s2h_setCursor(ui, vec2(0, 12));
 		ui.textColor.rgb = xzAxis ? vec3(1, 0, 0) : vec3(0, 0, 1);
-		ui.textColor.a = 0.4f;
+		ui.textColor.a = 0.4;
 		s2h_printTxt(ui, _SPACE);
 		s2h_printTxt(ui, posAxis ? _PLUS : _MINUS);
 		s2h_printTxt(ui, xzAxis ? _X : _Z);
