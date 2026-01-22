@@ -489,7 +489,7 @@ void s2h_printInt(inout ContextGather ui, int value)
 		while (tmp != 0)
 		{
 			ui.pxCursor.x += s2h_fontSize() * ui.scale;
-			tmp /= 10;
+			tmp = int(float(tmp) / 10.0);
 		}
 	}
 	// digits
@@ -500,7 +500,7 @@ void s2h_printInt(inout ContextGather ui, int value)
 		{
 			// 0..9
 			uint digit = imod(tmp, 10);
-			tmp /= 10;
+			tmp = int(float(tmp) / 10.0);
 			// go backwards
 			ui.pxCursor.x -= s2h_fontSize() * ui.scale;
 			s2h_printCharacter(ui, _0 + digit);
