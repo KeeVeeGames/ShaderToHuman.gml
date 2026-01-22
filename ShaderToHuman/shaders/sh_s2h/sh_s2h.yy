@@ -4,7 +4,7 @@
   "name":"sh_s2h",
   "parent":{
     "name":"ShaderToHuman",
-    "path":"ShaderToHuman.yyp",
+    "path":"folders/Extensions/ShaderToHuman.yy",
   },
   "resourceType":"GMShader",
   "resourceVersion":"2.0",

@@ -10,8 +10,8 @@
   "name":"obj_test",
   "overriddenProperties":[],
   "parent":{
-    "name":"ShaderToHuman",
-    "path":"ShaderToHuman.yyp",
+    "name":"Tests",
+    "path":"folders/Tests.yy",
   },
   "parentObjectId":null,
   "persistent":false,

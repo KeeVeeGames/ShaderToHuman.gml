@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"ShaderToHuman",
-    "path":"ShaderToHuman.yyp",
+    "name":"Tests",
+    "path":"folders/Tests.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

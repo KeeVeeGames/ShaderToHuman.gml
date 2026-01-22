@@ -3,8 +3,8 @@
   "%Name":"sh_test",
   "name":"sh_test",
   "parent":{
-    "name":"ShaderToHuman",
-    "path":"ShaderToHuman.yyp",
+    "name":"Tests",
+    "path":"folders/Tests.yy",
   },
   "resourceType":"GMShader",
   "resourceVersion":"2.0",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ShaderToHuman",
-    "path":"ShaderToHuman.yyp",
+    "path":"folders/Extensions/ShaderToHuman.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
