@@ -1,0 +1,1 @@
+draw_sprite_tiled(spr_background, 0, room_width / 2 + current_time / 20, room_height / 2 + current_time / 20);
