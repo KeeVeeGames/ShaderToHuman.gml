@@ -189,14 +189,23 @@ void s2h_drawSRGBRamp(inout ContextGather ui, vec2 pxPos);
 // call after using s2h_printTxt()
 // e.g. if(s2h_button(ui, 5, float4(1,0,1,1))) do();
 bool s2h_button(inout ContextGather ui, uint widthInCharacters);
+// same as above but with the explicit fragment position at which the interaction will be registered
+// use when saving the UI state on the texture
+bool s2h_button(inout ContextGather ui, uint widthInCharacters, vec2 statePos);
 // circle in a s2h_fontSize() x s2h_fontSize() character with mouse over
 // e.g. if(s2h_radioButton(ui, float4(1,0,0,1), UIState[0].SplatMode == 0) && leftMouse) UIState[0].SplatMode = 0;
 // @param checked fill inside using textColor
 // @return mouseOver (can be used as button or radio button)
 bool s2h_radioButton(inout ContextGather ui, bool checked);
+// same as above but with the explicit fragment position at which the interaction will be registered
+// use when saving the UI state on the texture
+bool s2h_radioButton(inout ContextGather ui, bool checked, vec2 statePos);
 // e.g. if(s2h_checkBox(ui, UIState[0].UICheckboxState == 0) && leftMouseClicked) UIState[0].UICheckboxState = !UIState[0].UICheckboxState;
 // @param checked fill inside using textColor
 bool s2h_checkBox(inout ContextGather ui, bool checked);
+// same as above but with the explicit fragment position at which the interaction will be registered
+// use when saving the UI state on the texture
+bool s2h_checkBox(inout ContextGather ui, bool checked, vec2 statePos);
 // @param fraction 0..1
 void s2h_progress(inout ContextGather ui, uint widthInCharacters, float fraction);
 //
@@ -788,7 +797,7 @@ void s2h_frame(inout ContextGather ui, uint widthInCharacters)
 	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0 - ui.dstColor.a));
 }
 
-bool s2h_button(inout ContextGather ui, uint widthInCharacters)
+bool s2h_button(inout ContextGather ui, uint widthInCharacters, vec2 statePos)
 {
 	vec4 color = ui.buttonColor;
 	const float border = 0.0;
@@ -815,12 +824,16 @@ bool s2h_button(inout ContextGather ui, uint widthInCharacters)
 
 	ui.dstColor = mix(ui.dstColor, vec4(localColor.rgb, 1), localColor.a * (1.0 - ui.dstColor.a));
 
-	vec2 delta = round(ui.mouseInput.xy + 0.5 - ui.pxPos);
+	vec2 delta = round(statePos + 0.5 - ui.pxPos);
 
 	return mouseOver && delta.x == 0.0 && delta.y == 0.0;
 }
+bool s2h_button(inout ContextGather ui, uint widthInCharacters)
+{
+    return s2h_button(ui, widthInCharacters, ui.mouseInput.xy);
+}
 
-bool s2h_radioButton(inout ContextGather ui, bool checked)
+bool s2h_radioButton(inout ContextGather ui, bool checked, vec2 statePos)
 {
 	vec4 color = ui.buttonColor;
 
@@ -844,12 +857,16 @@ bool s2h_radioButton(inout ContextGather ui, bool checked)
 
 	ui.pxCursor.x += s2h_fontSize() * ui.scale;
 
-	vec2 delta = round(ui.mouseInput.xy + 0.5 - ui.pxPos);
+	vec2 delta = round(statePos + 0.5 - ui.pxPos);
 
 	return mouseOver && delta.x == 0.0 && delta.y == 0.0;
 }
+bool s2h_radioButton(inout ContextGather ui, bool checked)
+{
+    return s2h_radioButton(ui, checked, ui.mouseInput.xy);
+}
 
-bool s2h_checkBox(inout ContextGather ui, bool checked)
+bool s2h_checkBox(inout ContextGather ui, bool checked, vec2 statePos)
 {
 	vec4 color = ui.buttonColor;
 
@@ -873,9 +890,13 @@ bool s2h_checkBox(inout ContextGather ui, bool checked)
 
 	ui.pxCursor.x += s2h_fontSize() * ui.scale;
 
-	vec2 delta = round(ui.mouseInput.xy + 0.5 - ui.pxPos);
+	vec2 delta = round(statePos + 0.5 - ui.pxPos);
 
 	return mouseOver && delta.x == 0.0 && delta.y == 0.0;
+}
+bool s2h_checkBox(inout ContextGather ui, bool checked)
+{
+    return s2h_checkBox(ui, checked, ui.mouseInput.xy);
 }
 
 void s2h_progress(inout ContextGather ui, uint widthInCharacters, float fraction)
@@ -929,7 +950,8 @@ void s2h_sliderFloat(inout ContextGather ui, uint widthInCharacters, inout float
 	// mouse over and left mouse button pressed
 	if(mouseOver && ui.mouseInput.z != 0.0)
 	{ 
-		float newFraction = clamp((ui.mouseInput.xy.x - innerAABB.x) / (innerAABB.z - innerAABB.x),0.0,1.0); 
+		float newFraction = clamp((ui.mouseInput.xy.x - innerAABB.x) / (innerAABB.z - innerAABB.x),0.0,1.0);
+		newFraction = floor(newFraction * 255.0) / 255.0;
 		value = mix(minValue, maxValue, newFraction); 
  
 		knobColor = vec3(1, 1, 1); 
