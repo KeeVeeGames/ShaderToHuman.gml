@@ -14,6 +14,9 @@ or browse the original [interactive documentation](https://electronicarts.github
 ## Without Shady
 [WIP]
 
+## GMEdit integration
+[WIP]
+
 # Features
 ## Variable prinitng and text rendering
 <img width="642" height="352" alt="Runner_g75LswX6Aj" src="https://github.com/user-attachments/assets/e94a45de-87e9-4742-8be8-4cfb2334643a" />
@@ -39,8 +42,9 @@ https://github.com/user-attachments/assets/d981380d-a463-4b24-a2b2-219e185f9bf4
 * As this is essentially a port to GLSL 1.20, some features that are not supported in the old versions of GLSL, but are used by the original developers, were reimplemented/downgraded when possible or stripped. Notably: all unsigned numbers became signed, bit shift and integer modulo were implemented as functions, font rendering is made by texture sampling and other minor changes.
 * This port doesn't support "Scatter" API, as it require a use of Compute Shaders.
 * UI functionality can only be done using custom surface drawing functions and saving state in the same ping-ponged frame texture.
+* [WIP]
 #### Fixes and new features
-* Along the way, I fixed and added some features to the main S2H. But it turned out that the original developers do not actually intend to receive pull requests, so if you want to have them for the original non-GameMaker version, you can grab it from [my fork](https://github.com/KeeVeeGames/ShaderToHuman) in `musnik-dev` branch.
+Along the way, I fixed and added some features to the main S2H. But it turned out that the original developers do not actually intend to receive pull requests, so if you want to have them for the original non-GameMaker version, you can grab it from [my fork](https://github.com/KeeVeeGames/ShaderToHuman) in `musnik-dev` branch.
 * Rendering is now fixed for non-antialised 3D scenes.
 * `transpileToGLSL.bat` now automatically finds the Visual Studio installation on the machine.
 * UI visual fixes.
