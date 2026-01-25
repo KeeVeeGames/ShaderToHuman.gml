@@ -17,8 +17,8 @@
   ],
   "name":"rm_test_2d",
   "parent":{
-    "name":"Tests",
-    "path":"folders/Tests.yy",
+    "name":"2D",
+    "path":"folders/Tests/2D.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

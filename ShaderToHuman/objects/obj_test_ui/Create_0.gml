@@ -10,3 +10,5 @@ uiState = new s2h_UiHandle();
 
 application_surface_draw_enable(false);
 gpu_set_texrepeat(true);
+
+window_set_caption("ShaderToHuman - UI Demo + RGB Ramp");

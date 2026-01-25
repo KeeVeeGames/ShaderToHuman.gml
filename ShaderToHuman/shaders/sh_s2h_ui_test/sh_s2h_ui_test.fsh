@@ -62,7 +62,7 @@ void main()
         UIState[0].sizeSliders = loadState(UIStatePos.sizeSliders);
         
         s2h_init(ui, pxPos + 0.5);
-        s2h_setCursor(ui, vec2(10, 10));
+        s2h_setCursor(ui, vec2(10, 20));
         s2h_setScale(ui, 2.0);
         ui.s2h_State = UIState[0].s2h_State;
         bool leftMouse = sign(u_Mouse.z) == 1.0;

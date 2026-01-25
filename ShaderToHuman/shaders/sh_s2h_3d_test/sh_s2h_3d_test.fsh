@@ -72,8 +72,8 @@ void main()
     s2h_printLF(ui);
     s2h_printLF(ui);
     s2h_setScale(ui, 1.5);
-    s2h_printTxt(ui, _C, _l, _i, _c, _k, _SPACE);
-    s2h_printTxt(ui, _a, _n, _d, _SPACE);
+    s2h_printTxt(ui, _L, _M, _B, _SPACE);
+    s2h_printTxt(ui, _t, _o, _SPACE);
     s2h_printTxt(ui, _d, _r, _a, _g, _SPACE);
     s2h_printTxt(ui, _c, _a, _m, _e, _r, _a);
     s2h_printLF(ui);

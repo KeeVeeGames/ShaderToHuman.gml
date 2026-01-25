@@ -14,13 +14,13 @@ void main()
     ui.mouseInput = u_Mouse;
     
     // disc
-    s2h_drawDisc(ui, vec2(100,50), 40.0, vec4(1,0,0,1));
-    s2h_drawDisc(ui, vec2(200,50), 20.0, vec4(0,1,0,1));
-    s2h_drawDisc(ui, vec2(150,50), 30.0, vec4(1,1,1,0.5));
+    s2h_drawDisc(ui, vec2(100,60), 40.0, vec4(1,0,0,1));
+    s2h_drawDisc(ui, vec2(200,60), 20.0, vec4(0,1,0,1));
+    s2h_drawDisc(ui, vec2(150,60), 30.0, vec4(1,1,1,0.5));
     // circle
-    s2h_drawCircle(ui, vec2(100, 150), 40.0, vec4(1,0,0,1), 1.5);
-    s2h_drawCircle(ui, vec2(200, 150), 20.0, vec4(0,1,0,1), 5.0);
-    s2h_drawCircle(ui, vec2(150, 150), 30.0, vec4(1,1,1,0.5), 8.0);
+    s2h_drawCircle(ui, vec2(100, 160), 40.0, vec4(1,0,0,1), 1.5);
+    s2h_drawCircle(ui, vec2(200, 160), 20.0, vec4(0,1,0,1), 5.0);
+    s2h_drawCircle(ui, vec2(150, 160), 30.0, vec4(1,1,1,0.5), 8.0);
     // halfSpace
     s2h_drawCrosshair(ui, ui.mouseInput.xy + 0.5, 10.0, vec4(1,1,1,1), 2.0);
     int edgeCount = 3;
@@ -28,7 +28,7 @@ void main()
     float insideAA = 1.0;
     for(int i = 0; i < edgeCount; ++i)
     {
-        vec2 center = vec2(80, 250);
+        vec2 center = vec2(80, 270);
         float w = float(i) * 3.14159265 * 2.0 / float(edgeCount) + 0.2;
         vec3 halfSpace = vec3(sin(w), cos(w), -20);
         halfSpace.z -= dot(halfSpace, vec3(center, 0));
@@ -40,23 +40,23 @@ void main()
     if(inside) ui.dstColor = vec4(1, 1, 1, 1);
     ui.dstColor = mix(ui.dstColor, vec4(1,1,1,1), insideAA);
     s2h_setScale(ui, 2.0);
-    s2h_setCursor(ui, vec2(96, 210));
+    s2h_setCursor(ui, vec2(96, 240));
     s2h_printTxt(ui, _n, _o, _A, _A);
-    s2h_setCursor(ui, vec2(216, 210));
+    s2h_setCursor(ui, vec2(216, 240));
     s2h_printTxt(ui, _A, _A);
     // rectangle
-    s2h_drawRectangle(ui, vec2(300, 10), vec2(500, 90), vec4(1,0,0,1));
-    s2h_drawRectangle(ui, vec2(400, 50), vec2(600, 65), vec4(0,1,0,1));
-    s2h_drawRectangle(ui, vec2(350, 25), vec2(550, 75), vec4(1,1,1,0.5));
+    s2h_drawRectangle(ui, vec2(300, 20), vec2(500, 100), vec4(1,0,0,1));
+    s2h_drawRectangle(ui, vec2(400, 70), vec2(600, 75), vec4(0,1,0,1));
+    s2h_drawRectangle(ui, vec2(350, 45), vec2(550, 85), vec4(1,1,1,0.5));
     // rectangleAA
-    s2h_drawRectangleAA(ui, vec2(300, 110), vec2(500, 190), vec4(1,0,0,1), vec4(1,1,0,1), 5.0);
-    s2h_drawRectangleAA(ui, vec2(400, 150), vec2(600, 165), vec4(0,0,1,1), vec4(0,1,1,1), 3.0);
-    s2h_drawRectangleAA(ui, vec2(350, 125), vec2(550, 175), vec4(1,1,1,1), vec4(0,0,0,0.5), 2.0);
+    s2h_drawRectangleAA(ui, vec2(300, 130), vec2(500, 210), vec4(1,0,0,1), vec4(1,1,0,1), 5.0);
+    s2h_drawRectangleAA(ui, vec2(400, 180), vec2(600, 185), vec4(0,0,1,1), vec4(0,1,1,1), 3.0);
+    s2h_drawRectangleAA(ui, vec2(350, 155), vec2(550, 195), vec4(1,1,1,1), vec4(0,0,0,0.5), 2.0);
     // lines
     for(int i = 1; i < 5; ++i)
     {
         float w = float(i) * 1.1 + 1.0 + u_Mouse.x / 100.0;
-        vec2 center = vec2(300, 250) + vec2(60 * i, 0);
+        vec2 center = vec2(300, 270) + vec2(60 * i, 0);
         vec2 sc = vec2(sin(w), cos(w)) * 20.0;
         s2h_drawLine(ui, center + sc, center - sc, vec4(s2h_indexToColor(uint(i)), 1), 1.0 + float(i) * 4.0);
     }

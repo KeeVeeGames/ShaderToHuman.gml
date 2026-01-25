@@ -17,8 +17,8 @@
   ],
   "name":"rm_test_ui",
   "parent":{
-    "name":"Tests",
-    "path":"folders/Tests.yy",
+    "name":"UI",
+    "path":"folders/Tests/UI.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

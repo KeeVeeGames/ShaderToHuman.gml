@@ -17,8 +17,8 @@
   ],
   "name":"rm_test_3d",
   "parent":{
-    "name":"Tests",
-    "path":"folders/Tests.yy",
+    "name":"3D",
+    "path":"folders/Tests/3D.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

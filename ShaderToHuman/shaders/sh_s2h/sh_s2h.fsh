@@ -5,6 +5,9 @@
 //////////////////////////////////////////////////////////////////////////
 
 // Port specific
+
+const int _S2H_PORT_VERSION = 1;
+
 #define uint int
 #define uvec2 ivec2
 
@@ -20,22 +23,10 @@ int bit(int n, int b)
     return imod(n / b, 2);
 }
 
-// shift_left(x, n) = x << n = x * 2^n
-int shift_left(int x, int n)
-{
-    for (int i = 0; i < n; i++) {
-        x *= 2;
-    }
-    return x;
-}
-
 // shift_right(x, n) = x >> n = x / 2^n
 int shift_right(int x, int n)
 {
-    for (int i = 0; i < n; i++) {
-        x /= 2;
-    }
-    return x;
+    return int(float(x) / pow(2.0, float(n)));
 }
 
 vec2 round(vec2 v) {
@@ -66,6 +57,8 @@ bool s2h_fontLookup(int ascii, ivec2 pxPos)
 #pragma shady: skip_compilation
 
 //
+
+const int _S2H_VERSION = 11;
 
 // pixel shader or compute shader looping through all pixels
 
@@ -414,7 +407,6 @@ const uint _6 = 54;
 const uint _7 = 55;
 const uint _8 = 56;
 const uint _9 = 57;
-const int _S2H_VERSION = 11;
 
 void s2h_init(out ContextGather ui, vec2 inPxPos)
 {
@@ -527,8 +519,8 @@ void s2h_printInt(inout ContextGather ui, int value)
 
 void s2h_printHex(inout ContextGather ui, uint value)
 {
-	// 8 nibbles
-	for(int i = 7; i >= 0; --i)
+	// 4 nibbles
+	for(int i = 3; i >= 0; --i)
 	{
 		// 0..15
 		uint nibble = imod(shift_right(value, (uint(i) * 4)), 16);
@@ -544,7 +536,7 @@ void s2h_printFloat(inout ContextGather ui, float value)
 
 	s2h_printCharacter(ui, _PERIOD);
 
-	uint digitCount = 3;
+	const uint digitCount = 3;
 
 	// todo: unit tests, this is likely wrong at lower precision
 

@@ -21,12 +21,14 @@ unfiromClipFromWorld = shader_get_uniform(sh_s2h_3d_test, "u_clipFromWorld");
 unfiromWorldFromClip = shader_get_uniform(sh_s2h_3d_test, "u_worldFromClip");
 unfiromWorldFromView = shader_get_uniform(sh_s2h_3d_test, "u_worldFromView");
 
-application_surface_draw_enable(false);
-gpu_set_texrepeat(true);
-
 posX = 0;
 posY = 3;
 posZ = -10;
 
 camAngleX = 0;
 camAngleY = 0;
+
+application_surface_draw_enable(false);
+gpu_set_texrepeat(true);
+
+window_set_caption("ShaderToHuman - 3D Demo");

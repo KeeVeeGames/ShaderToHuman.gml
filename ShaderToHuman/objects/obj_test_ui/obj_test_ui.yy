@@ -12,8 +12,8 @@
   "name":"obj_test_ui",
   "overriddenProperties":[],
   "parent":{
-    "name":"Tests",
-    "path":"folders/Tests.yy",
+    "name":"UI",
+    "path":"folders/Tests/UI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -3,8 +3,8 @@
   "%Name":"sh_s2h_3d_test",
   "name":"sh_s2h_3d_test",
   "parent":{
-    "name":"Tests",
-    "path":"folders/Tests.yy",
+    "name":"3D",
+    "path":"folders/Tests/3D.yy",
   },
   "resourceType":"GMShader",
   "resourceVersion":"2.0",

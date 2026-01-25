@@ -12,8 +12,8 @@
   "name":"obj_test_3d",
   "overriddenProperties":[],
   "parent":{
-    "name":"Tests",
-    "path":"folders/Tests.yy",
+    "name":"3D",
+    "path":"folders/Tests/3D.yy",
   },
   "parentObjectId":null,
   "persistent":false,

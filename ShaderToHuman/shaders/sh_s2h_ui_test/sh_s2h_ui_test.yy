@@ -3,8 +3,8 @@
   "%Name":"sh_s2h_ui_test",
   "name":"sh_s2h_ui_test",
   "parent":{
-    "name":"Tests",
-    "path":"folders/Tests.yy",
+    "name":"UI",
+    "path":"folders/Tests/UI.yy",
   },
   "resourceType":"GMShader",
   "resourceVersion":"2.0",
