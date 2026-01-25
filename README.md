@@ -8,32 +8,32 @@ If you want to get an introduction, check out the [GPC 2026 presentation](https:
 or browse the original [interactive documentation](https://electronicarts.github.io/ShaderToHuman).
 
 # Installation
-## With Shady
+### With Shady (recommended)
 [WIP]
 
-## Without Shady
+### Without Shady
 [WIP]
 
-## GMEdit integration
+### <a href=""><img src="https://img.shields.io/badge/OPTIONAL-9c6b19" alt="Optional" align="center"></a> GMEdit integration
 [WIP]
 
 # Features
-## Variable prinitng and text rendering
+### Variable prinitng and text rendering
 <img width="642" height="352" alt="Runner_g75LswX6Aj" src="https://github.com/user-attachments/assets/e94a45de-87e9-4742-8be8-4cfb2334643a" />
 
 [WIP]
 
-## 2D shapes rendering
+### 2D shapes rendering
 https://github.com/user-attachments/assets/e1f1ef46-667f-411f-9515-e4fab9ea3ac6
 
 [WIP]
 
-## 3D shapes rendering
+### 3D shapes rendering
 https://github.com/user-attachments/assets/9f990f59-603c-4ec8-b68a-3871a5fb030b
 
 [WIP]
 
-## Immediate mode UI
+### Immediate mode UI
 https://github.com/user-attachments/assets/d981380d-a463-4b24-a2b2-219e185f9bf4
 
 [WIP]
