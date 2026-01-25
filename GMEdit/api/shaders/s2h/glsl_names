@@ -1,0 +1,174 @@
+// General
+
+_S2H_PORT_VERSION
+_S2H_VERSION
+
+ContextGather
+// in pixels, no fractional part (half pixel offset)
+pxCursor
+// 1/2/3/4
+scale
+// .xy:-100,-100 if not yet set, .xy:absolutePos, z:leftMouse 0/1, w:rightMouse 0/1, no fractional part (half pixel offset)
+mouseInput
+// window left top, no fractional part (half pixel offset), set by s2h_setPos(), used by s2h_printLF()
+pxLeftX
+// in pixels, no fractional part (half pixel offset), set by s2h_init()
+pxPos
+// premultiplied RGBA, alpha 1 is assumed to be opaque, don't init with a color or s2h_button() will not work
+dstColor
+// RGBA, alpha 1 is assumed to be opaque, s2h_progress()
+textColor
+// for s2h_frame()
+frameFillColor
+// for s2h_frame()
+frameBorderColor
+// for s2h_button(), s2h_checkbox(), s2h_radiobutton, s2h_progress(), s2h_sliderFloat()
+buttonColor
+//
+lineWidth
+
+s2h_Triangle
+
+s2h_init(ui:ContextGather)->| or s2h_init(context:Context3D, ro:vec3, rd:vec3)->for 3D
+
+// Print
+s2h_setCursor(ui:ContextGather, inpxLeftTop:vec2)->| Set text cursor position, next printLF() will reset to this x position
+s2h_deinit(ui:ContextGather, s2h_State:ivec4)->| Write int4 state for next frame, don't call if you don't want UI State
+s2h_setScale(ui, scale:float)->void
+s2h_printTxt(ui:ContextGather, _A, _b, _C, _d, _E, _f)->| Arguments are ASCII constans like _A, _b, _1, _SPACE
+s2h_printSpace(ui:ContextGather, numberOfChars:float)->| Useful for table headers and to center text
+s2h_printLF(ui:ContextGather)->| Jump to next line (line feed)
+s2h_printInt(ui:ContextGather, value:int)->void
+s2h_printHex(ui:ContextGather, value:int)->| Print hexadecimal e.g. "00A1" value is positive int e.g. 0x123, 0xff00
+s2h_printFloat(ui:ContextGather, value:float)->void
+s2h_printCharacter(ui:ContextGather, ascii:int)->| Don't use directly
+s2h_printDisc(ui:ContextGather, color:vec4)->| Circle in a fontSize x fontSize character
+s2h_printBox(ui:ContextGather, color:vec4)->| Block in a fontSize x fontSize character
+s2h_frame(ui:ContextGather, widthInCharacters:int)->| Useful for table headers, similar to s2h_button but not interactive, call after using s2h_printTxt()
+
+// ASCII symbols
+_A
+_B
+_C
+_D
+_E
+_F
+_G
+_H
+_I
+_J
+_K
+_L
+_M
+_N
+_O
+_P
+_Q
+_R
+_S
+_T
+_U
+_V
+_W
+_X
+_Y
+_Z
+_a
+_b
+_c
+_d
+_e
+_f
+_g
+_h
+_i
+_j
+_k
+_l
+_m
+_n
+_o
+_p
+_q
+_r
+_s
+_t
+_u
+_v
+_w
+_x
+_y
+_z
+_SINGLEQUOTE    // `'`
+_UNDERSCORE     // `_`
+_MINUS          // `-`
+_PLUS           // `+`
+_ASTERISK       // `*`
+_PERIOD         // `.`
+_COLON          // `:`
+_COMMA          // `,`
+_SPACE          // ` `
+_LESS           // `<`
+_EQUAL          // `=`
+_GREATER        // `>`
+_SLASH          // `/`
+_BACKSLASH      // `\`
+_0
+_1
+_2
+_3
+_4
+_5
+_6
+_7
+_8
+_9
+
+// 2D
+s2h_drawDisc(ui:ContextGather, pxCenter:vec2, pxRadius:float, color:vec4)->| Draw anti aliased filled disc
+s2h_drawCircle(ui:ContextGather, pxCenter:vec2, pxRadius:float, color:vec4, pxThickness:float)->| Draw anti aliased circle
+s2h_drawHalfSpace(ui:ContextGather, halfSpace:vec3, visualizePoint:vec2, color:vec4, pxCircleRadius:float, pxLineRadius:float)->| Draw anti aliased circle
+s2h_drawRectangle(ui:ContextGather, pxLeftTop:vec2, pxBottomRight:vec2, color:vec4)->| Draw not anti aliased rectangle (fast and simple), pxLeftTop included, pxBottomRight excluded
+s2h_drawRectangleAA(ui:ContextGather, pxA:vec2, pxB:vec2, borderColor:vec4, innerColor:vec4, pxThickness:float)->| Border half inwards and half outwards, pxThickness >0 results in rounded corners
+s2h_drawCrosshair(ui:ContextGather, pxCenter:vec2, pxRadius:float, color:vec4, pxThickness:float)->| Anti aliased, px position should be pixel centered (+0.5)
+s2h_drawLine(ui:ContextGather, pxBegin:vec2, pxEnd:vec2, color:vec4, pxThickness:float)->| Hard edges, anti aliased, px position should be pixel centered (+0.5)
+s2h_drawArrow(ui:ContextGather, pxStart:vec2, pxEnd:vec2, color:vec4, arrowHeadLength:float, arrowHeadWidth:float)->| Anti aliased px position should be pixel centered (+0.5)
+s2h_drawTriangle(ui:ContextGather, s2h_Triangle tri, color:vec4)->| Anti aliased px position should be pixel centered (+0.5)
+s2h_drawSRGBRamp(ui:ContextGather, pxPos:vec2)->| 256x32 horizontal color ramp in sRGB space, 128 should be in the middle, RGB color gradient on outside
+
+
+// UI
+s2h_button(ui:ContextGather, widthInCharacters:int, statePos:vec2)->bool | statePos is the fragment position at which the interaction will be registered, returns true if clicked
+s2h_radioButton(ui:ContextGather, checked:bool, statePos:vec2)->bool | statePos is the fragment position at which the interaction will be registered, returns true if clicked
+s2h_checkBox(ui:ContextGather, checked:bool, statePos:vec2)->bool | statePos is the fragment position at which the interaction will be registered, returns true if clicked
+s2h_progress(ui:ContextGather, widthInCharacters:int, fraction:float)->| Fraction 0..1
+s2h_sliderFloat(ui:ContextGather, widthInCharacters:int, value:float, minValue:float, maxValue:float)->void
+s2h_sliderRGB(ui:ContextGather, widthInCharacters:int, value:vec3)->| LDR color (0..1 range)
+s2h_sliderRGBA(ui:ContextGather, widthInCharacters:int, value:vec4)->| LDR color (0..1 range) with alpha
+
+// helper functions
+s2h_accurateLinearToSRGB(linearCol:vec3)->vec3 | Slow but accurate
+s2h_accurateSRGBToLinear(sRGBCol:vec3)->vec3 | Slow but accurate
+s2h_indexToColor(index:int)->vec3 | Get pseudo-random color, 0 is black, repeats every 512 elements
+s2h_colorRampRGB(value:float)->vec3
+
+//
+
+// 3D
+Context3D
+// ray origin
+ro
+// ray direction, normalized
+rd
+// surfacePos = ro + rd * depth
+depth
+//
+dstColor
+
+s2h_drawLineWS(context:Context3D, from:vec3, to:vec3, color:vec4, thickness:float)->void
+s2h_drawAABB(context:Context3D, center:vec3, halfSize:vec3, color:vec4) | Axis Aligned Bounding Box
+s2h_drawArrowWS(context:Context3D, from:vec3, to:vec3, color:vec4, thickness:float)->void
+s2h_drawBasis(context:Context3D, worldFromObject:mat4, r:float)->void | worldFromObject aka objectToWorld, r in world space units
+s2h_drawSphereWS(context:Context3D, pos:vec3, color:vec4, radius:float)->void
+s2h_drawCheckerBoard(context:Context3D, offset:vec3)->void | 8x8 checker board with X (red) and Z (blue) around offset pointing up (Y+)
+s2h_drawSkybox(context:Context3D)->void | Infinitely far, +/- X/Z and horizon, useful to having some background for the user to orient themselves
