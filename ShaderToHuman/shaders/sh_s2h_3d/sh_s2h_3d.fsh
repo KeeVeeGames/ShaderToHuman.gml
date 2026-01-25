@@ -1,7 +1,14 @@
 //////////////////////////////////////////////////////////////////////////
 //   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
 //  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
+//  GLSL 1.20 / GameMaker port is made by Nikita Musatov @KeeVeeGames.  //
 //////////////////////////////////////////////////////////////////////////
+
+// Port specific
+
+#pragma shady: skip_compilation
+
+//
 
 // Example:
 // #include "s2h.h"
@@ -347,3 +354,5 @@ void sceneWithShadows(inout Context3D context)
         context.dstColor.rgb = mix(litScene.rgb, vec3(0.0, 0.0, 0.0), shadowFactor);
     }
 }
+
+void main() {}

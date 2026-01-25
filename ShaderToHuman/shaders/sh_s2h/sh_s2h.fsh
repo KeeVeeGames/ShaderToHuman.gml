@@ -1,4 +1,10 @@
-// GameMaker-port specific
+//////////////////////////////////////////////////////////////////////////
+//   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
+//  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
+//  GLSL 1.20 / GameMaker port is made by Nikita Musatov @KeeVeeGames.  //
+//////////////////////////////////////////////////////////////////////////
+
+// Port specific
 #define uint int
 #define uvec2 ivec2
 
@@ -57,10 +63,9 @@ bool s2h_fontLookup(int ascii, ivec2 pxPos)
     return texture2D(s2h_fontTexture, uv).r > 0.5;
 }
 
-//////////////////////////////////////////////////////////////////////////
-//   Shader To Human (S2H) - HLSL/GLSL library for debugging shaders    //
-//  Copyright (c) 2024-2025 Electronic Arts Inc.  All rights reserved.  //
-//////////////////////////////////////////////////////////////////////////
+#pragma shady: skip_compilation
+
+//
 
 // pixel shader or compute shader looping through all pixels
 
