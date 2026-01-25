@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"sh_s2h_2d_test",
+  "name":"sh_s2h_2d_test",
+  "parent":{
+    "name":"Tests",
+    "path":"folders/Tests.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

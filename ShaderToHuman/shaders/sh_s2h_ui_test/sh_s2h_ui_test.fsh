@@ -154,6 +154,8 @@ void main()
         
         s2h_drawCrosshair(ui, ui.mouseInput.xy + 0.5, 10.0, vec4(1,1,1,1), 2.0);
         
+        s2h_drawSRGBRamp(ui, vec2(u_Resolution.x - 258.0, 2.0));
+        
         // save UI state
         if (saveState(UIStatePos.UIRadioCheckbox, pxPos))
             gl_FragColor = vec4(float(UIState[0].UIRadioState) / 255.0, float(UIState[0].UICheckboxState) / 255.0, 0.0, 0.0);
