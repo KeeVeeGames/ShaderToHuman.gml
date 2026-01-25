@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"sh_s2h_printFloat_test",
+  "name":"sh_s2h_printFloat_test",
+  "parent":{
+    "name":"Print",
+    "path":"folders/Tests/Print.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

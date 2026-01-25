@@ -1,0 +1,37 @@
+varying vec2 v_vTexcoord;
+varying vec4 v_vColour;
+
+uniform sampler2D s2h_fontTexture;
+#pragma shady: import(sh_s2h)
+
+uniform vec2 u_Resolution;
+
+void main()
+{
+    vec2 pxPos = v_vTexcoord * u_Resolution;
+    ContextGather ui;
+    s2h_init(ui, pxPos);
+    
+    s2h_setCursor(ui, vec2(10, 10));
+    s2h_setScale(ui, 2.0);
+    
+    ui.textColor = vec4(0, 1, 1, 1);
+    s2h_printTxt(ui, _s, _2, _h, _UNDERSCORE);
+    s2h_printTxt(ui, _p, _r, _i, _n, _t);
+    s2h_printTxt(ui, _F, _l, _o, _a, _t);
+    s2h_printLF(ui);
+    s2h_printLF(ui);
+    ui.textColor = vec4(1, 1, 1, 1);
+    s2h_printFloat(ui, -12.34);
+    s2h_printTxt(ui, _COMMA);
+    s2h_printFloat(ui, 0.34);
+    s2h_printLF(ui);
+    s2h_printLF(ui);
+    
+    // your shader code goes there
+    vec4 color = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
+    
+    // mix your shader result with s2h output
+    vec4 s2hColor = vec4(s2h_accurateLinearToSRGB(ui.dstColor.rgb), ui.dstColor.a);
+    gl_FragColor = mix(color, s2hColor, s2hColor.a);
+}
