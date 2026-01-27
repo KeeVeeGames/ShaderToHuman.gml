@@ -1,5 +1,7 @@
 #macro _S2H_ERROR "[ShaderToHuman] Error ::"
 
+show_debug_message($"ShaderToHuman.gml by Nikita Musatov | https://github.com/KeeVeeGames | https://musnik.itch.io");
+
 function __surface_validate(id/*:surface*/, width/*:int*/, height/*:int*/, format/*:surface_format*/ = surface_rgba8unorm)/*->surface*/ {
     gml_pragma("forceinline");
     
