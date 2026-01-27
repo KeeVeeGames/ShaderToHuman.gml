@@ -2,9 +2,9 @@ varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
 uniform sampler2D s2h_fontTexture;
-#pragma shady: import(sh_s2h)
-
 uniform vec2 u_Resolution;
+
+#pragma shady: import(sh_s2h)
 
 void main()
 {

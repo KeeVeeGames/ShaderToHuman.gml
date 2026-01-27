@@ -2,13 +2,13 @@ varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
 uniform sampler2D s2h_fontTexture;
-#pragma shady: import(sh_s2h)
-
 uniform vec4 u_Mouse;
+
+#pragma shady: import(sh_s2h)
 
 void main()
 {
-    vec2 pxPos = vec2(gl_FragCoord.xy);
+    vec2 pxPos = gl_FragCoord.xy;
     ContextGather ui;
     s2h_init(ui, pxPos);
     ui.mouseInput = u_Mouse;

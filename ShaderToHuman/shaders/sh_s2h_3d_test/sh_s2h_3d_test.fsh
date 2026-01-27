@@ -2,15 +2,14 @@ varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
 uniform sampler2D s2h_fontTexture;
-#pragma shady: import(sh_s2h)
-#pragma shady: import(sh_s2h_3d)
-
-uniform vec4 u_Mouse;
 uniform vec2 u_Resolution;
 uniform float u_Time;
 uniform mat4 u_clipFromWorld;
 uniform mat4 u_worldFromClip;
 uniform mat4 u_worldFromView;
+
+#pragma shady: import(sh_s2h)
+#pragma shady: import(sh_s2h_3d)
 
 // 1:no Anti-Aliasing (fast), 2:2x2, 3:3x3 (pretty)
 const int AA = 3;
@@ -59,7 +58,7 @@ vec3 computeSkyColor(inout Context3D context)
 
 void main()
 {
-    vec2 pxPos = vec2(gl_FragCoord.xy);
+    vec2 pxPos = gl_FragCoord.xy;
     Context3D context;
     ContextGather ui;
     vec3 wsCamPos = ((u_worldFromView * vec4(0, 0, 0, 1)).xyz);
@@ -104,8 +103,6 @@ void main()
         vec3 ro = ((u_worldFromView * vec4(0, 0, 0, 1)).xyz);
         vec3 rd = normalize(worldPos - ro);
         s2h_init(context, ro, rd);
-        // uncomment to composite with former pass
-        // context.dstColor = vec4(computeSkyColor(context), 1);
         sceneWithShadows(context);
         
         float s = sin(u_Time) * 3.0;
@@ -123,7 +120,6 @@ void main()
     gl_FragColor = mix(vec4(computeSkyColor(context), 1), gl_FragColor, gl_FragColor.a);
     // composite 3D UI on top   
     gl_FragColor = mix(gl_FragColor, vec4(tot.rgb, 1), tot.a);
-    // gl_FragColor = mix(vec4(tot.rgb, 1), gl_FragColor, gl_FragColor.a);
     // composite 2D UI on top
     gl_FragColor = gl_FragColor * (1.0 - ui.dstColor.a) + ui.dstColor;
 }
