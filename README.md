@@ -198,7 +198,7 @@ s2h_deinit(ui, UIState[0].s2h_State);
 * UI functionality can only be done using custom surface drawing functions and saving state in the same ping-ponged frame texture.
 * [WIP]
 #### Fixes and new features
-Along the way, I fixed and added some features to the main S2H. But it turned out that the original developers did not actually intend to receive pull requests, so if you want to have them for the original non-GameMaker version, you can grab it from [my fork](https://github.com/KeeVeeGames/ShaderToHuman) in `musnik-dev` branch.
+Along the way, I fixed and added some features to the main S2H. Some of them got into pull requests, some of those pull requests were merged, but not everything. So if you want to have these features for the original non-GameMaker version, you can grab it from [my fork](https://github.com/KeeVeeGames/ShaderToHuman) in `musnik-dev` branch.
 * Rendering is now fixed for non-antialised 3D scenes.
 * `transpileToGLSL.bat` now automatically finds the Visual Studio installation on the machine.
 * UI functionality is now available for targets that don't support SSBOs (WebGL, OpenGL 1.20).
