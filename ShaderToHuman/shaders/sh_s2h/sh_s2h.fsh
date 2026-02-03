@@ -17,7 +17,7 @@ int imod(int x, int y)
     return x - y * (x / y);
 }
 
-// bit(n, b) = n & (1 << p), where b = 2^p
+// bit(n, b) = (n >> p) & 1, where b = 2^p
 int bit(int n, int b)
 {
     return imod(n / b, 2);

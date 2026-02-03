@@ -24,9 +24,9 @@ void main()
     s2h_printTxt(ui, _H, _u, _m, _a, _n);
     s2h_printTxt(ui, _PERIOD, _g, _m, _l);
     s2h_printTxt(ui, _SPACE, _v);
-    s2h_printInt(ui, _S2H_PORT_VERSION);
-    s2h_printTxt(ui, _PERIOD);
     s2h_printInt(ui, _S2H_VERSION);
+    s2h_printTxt(ui, _PERIOD);
+    s2h_printInt(ui, _S2H_PORT_VERSION);
     s2h_printLF(ui);
     s2h_printLF(ui);
     ui.textColor = vec4(1, 1, 1, 1);
